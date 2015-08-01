@@ -4,7 +4,7 @@ ___
 #### For developers
 ###### YouTrack - https://enplayer.myjetbrains.com
 ___
-##### General Public License
+##### General Public License (GNU GPLv3)
 ```
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
