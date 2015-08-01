@@ -1,5 +1,5 @@
 # EN Player
-EN Player - A Simple Video Player a player which plays all formats video (based on VLC player) and helps users to watch videos in english with subtitles and understand each word and sentence. 
+EN Player - A Simple Video Player a player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence. 
 ___
 #### For developers
 ###### YouTrack - https://enplayer.myjetbrains.com
