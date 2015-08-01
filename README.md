@@ -1,5 +1,5 @@
 # EN Player
-EN Player is a simple player which helps users to watch videos in english with subtitles and understand each word and sentence. 
+EN Player - A Simple Video Player which helps users to watch videos in english with subtitles and understand each word and sentence. 
 ___
 #### For developers
 ###### YouTrack - https://enplayer.myjetbrains.com
