@@ -3,6 +3,7 @@
 #include <QtDebug>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,17 +15,23 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    qInfo()<<("Application was closed");
     delete ui;
 }
 
 void MainWindow::on_actionOpen_triggered()
 {
-     qDebug()<<("Open file");
+    QString fileName =
+                QFileDialog::getOpenFileName(this, tr("Open file"),
+                                             QDir::homePath(),
+                                             tr("Multimedia files(*)"));
+    if (fileName.isEmpty())
+            return;
+    qInfo()<<("Open file: "+fileName);
 }
 
 void MainWindow::on_actionExit_triggered()
 {
-    qDebug()<<("Application was closed");
     QApplication::quit();
 }
 
