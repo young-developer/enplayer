@@ -44,7 +44,6 @@ void MainWindow::on_actionOpen_triggered()
     _media = new VlcMedia(fileName, true, _instance);
 
     _player->open(_media);
-    _player->play();
     qInfo()<<("Open file: "+fileName);
 }
 
