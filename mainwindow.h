@@ -7,6 +7,10 @@ namespace Ui {
 class MainWindow;
 }
 
+class VlcInstance;
+class VlcMedia;
+class VlcMediaPlayer;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,6 +28,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    VlcInstance *_instance;
+    VlcMedia *_media;
+    VlcMediaPlayer *_player;
 };
 
 #endif // MAINWINDOW_H
