@@ -1,5 +1,10 @@
 # EN Player
-EN Player - A Simple Video Player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence. 
+EN Player - A Simple Video Player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence.
+___
+#### Requirements
+- QT 5.5.0  http://www.qt.io/developers/
+- LibVLC-Qt  https://github.com/vlc-qt/
+
 ___
 #### For developers
 ###### YouTrack - https://enplayer.myjetbrains.com
