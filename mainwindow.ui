@@ -15,8 +15,39 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="VlcWidgetVideo" name="videoWidget" native="true"/>
+    </item>
+    <item>
+     <widget class="ControlPanel" name="controlPanel" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>60</height>
+       </size>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -99,6 +130,12 @@
    <class>VlcWidgetVideo</class>
    <extends>QWidget</extends>
    <header>vlc-qt/WidgetVideo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ControlPanel</class>
+   <extends>QWidget</extends>
+   <header>controlpanel.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

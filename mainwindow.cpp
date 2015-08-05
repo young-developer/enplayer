@@ -11,7 +11,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -25,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _player->setVideoWidget(ui->videoWidget);
 
     ui->videoWidget->setMediaPlayer(_player);
+    ui->controlPanel->setMediaPlayer(_player);
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +47,7 @@ void MainWindow::on_actionOpen_triggered()
     _player->play();
     qInfo()<<("Open file: "+fileName);
 }
+
 
 void MainWindow::on_actionExit_triggered()
 {
