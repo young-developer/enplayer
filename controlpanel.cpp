@@ -4,6 +4,7 @@
 #include <vlc-qt/MediaPlayer.h>
 #include "vlc-qt/WidgetVideo.h"
 #include "controlpanel.h"
+#include "mainwindow.h"
 
 ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _playButton(0),
@@ -78,14 +79,6 @@ void ControlPanel::onPlayButtonClicked()
 
 void ControlPanel::onToogleFullScreen()
 {
-    switch(windowState())
-    {
-        case Qt::WindowFullScreen:
-            qInfo()<<"onToogleFullScreen::Normal mode";
-            break;
-        default:
-            qInfo()<<"onToogleFullScreen::Fullscreen mode";
-        break;
-    }
+    static_cast<MainWindow*>(parentWidget()->parentWidget())->toogleFullScreen();
 }
 

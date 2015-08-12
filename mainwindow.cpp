@@ -58,3 +58,23 @@ void MainWindow::on_actionRead_Me_triggered()
 {
     QDesktopServices::openUrl(QUrl("https://github.com/young-developer/enplayer/wiki", QUrl::TolerantMode));
 }
+
+void MainWindow::toogleFullScreen()
+{
+    switch(windowState())
+    {
+        case Qt::WindowFullScreen:
+            showNormal();
+            qInfo()<<"onToogleFullScreen::Normal mode";
+            break;
+        default:
+            showFullScreen();
+            qInfo()<<"onToogleFullScreen::Fullscreen mode";
+        break;
+    }
+}
+
+void MainWindow::mouseDoubleClickEvent( QMouseEvent * e )
+{
+    toogleFullScreen();
+}

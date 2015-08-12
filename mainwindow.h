@@ -19,6 +19,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void mouseDoubleClickEvent(QMouseEvent *e);
+    void toogleFullScreen();
 private slots:
     void on_actionOpen_triggered();
 
