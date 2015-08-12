@@ -10,6 +10,9 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>EN Player</string>
   </property>
@@ -44,7 +47,7 @@
       <property name="maximumSize">
        <size>
         <width>16777215</width>
-        <height>60</height>
+        <height>50</height>
        </size>
       </property>
      </widget>

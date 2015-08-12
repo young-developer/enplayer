@@ -2,6 +2,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QFileDialog>
+#include <QTimer>
 
 #include <vlc-qt/Common.h>
 #include <vlc-qt/Instance.h>
@@ -22,6 +23,13 @@ MainWindow::MainWindow(QWidget *parent) :
     _instance = new VlcInstance(VlcCommon::args(), this);
     _player = new VlcMediaPlayer(_instance);
     _player->setVideoWidget(ui->videoWidget);
+    _idleTimer = new QTimer(this);
+    _idleTimer->setInterval(3000);//idle interval 3sec
+    connect(_idleTimer, SIGNAL(timeout()), this, SLOT(on_Idle()));
+    _idleTimer->start();
+    centralWidget()->setMouseTracking(true);
+    this->setMouseTracking(true);
+    ui->videoWidget->setMouseTracking(true);
 
     ui->videoWidget->setMediaPlayer(_player);
     ui->controlPanel->setMediaPlayer(_player);
@@ -30,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     qInfo()<<("Application was closed");
+    delete _player;
+    delete _media;
+    delete _instance;
     delete ui;
 }
 
@@ -59,22 +70,52 @@ void MainWindow::on_actionRead_Me_triggered()
     QDesktopServices::openUrl(QUrl("https://github.com/young-developer/enplayer/wiki", QUrl::TolerantMode));
 }
 
-void MainWindow::toogleFullScreen()
+bool MainWindow::isFullScreen()
 {
-    switch(windowState())
+    if(windowState() == Qt::WindowFullScreen)
     {
-        case Qt::WindowFullScreen:
-            showNormal();
-            qInfo()<<"onToogleFullScreen::Normal mode";
-            break;
-        default:
-            showFullScreen();
-            qInfo()<<"onToogleFullScreen::Fullscreen mode";
-        break;
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
-void MainWindow::mouseDoubleClickEvent( QMouseEvent * e )
+void MainWindow::on_Idle()
+{
+    if(isFullScreen())
+    {
+        _idleTimer->stop();
+        ui->controlPanel->hidePanel();
+        ui->menuBar->hide();
+        qInfo()<<"Idle mode";
+    }
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+    _idleTimer->stop(); // reset timer
+    _idleTimer->start();
+    ui->controlPanel->showPanel();
+    ui->menuBar->show();
+}
+
+void MainWindow::toogleFullScreen()
+{
+    if(isFullScreen())
+    {
+        showNormal();
+        qInfo()<<"onToogleFullScreen::Normal mode";
+    }
+    else
+    {
+        showFullScreen();
+        qInfo()<<"onToogleFullScreen::Fullscreen mode";
+    }
+}
+
+void MainWindow::mouseDoubleClickEvent( QMouseEvent *)
 {
     toogleFullScreen();
 }

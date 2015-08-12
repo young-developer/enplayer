@@ -20,7 +20,9 @@ public:
     ~MainWindow();
 
     void mouseDoubleClickEvent(QMouseEvent *e);
+    void mouseMoveEvent(QMouseEvent *event);
     void toogleFullScreen();
+    bool isFullScreen();
 private slots:
     void on_actionOpen_triggered();
 
@@ -28,7 +30,9 @@ private slots:
 
     void on_actionRead_Me_triggered();
 
+    void on_Idle();
 private:
+    QTimer *_idleTimer;
     Ui::MainWindow *ui;
     VlcInstance *_instance;
     VlcMedia *_media;

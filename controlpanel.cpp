@@ -37,7 +37,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     this->_volumeSlider->setVolume(50);
     this->_toogleSubtitles->setDisabled(true);
     this->setMinimumHeight(30);
-    this->setMaximumHeight(60);
+    this->setMaximumHeight(40);
 }
 
 void ControlPanel::setMediaPlayer(VlcMediaPlayer *player)
@@ -50,12 +50,22 @@ void ControlPanel::setMediaPlayer(VlcMediaPlayer *player)
 
 void ControlPanel::hidePanel()
 {
-
+    _playButton->hide();
+    _positionSlider->hide();
+    _volumeSlider->hide();
+    _toogleFullscreen->hide();
+    _toogleSubtitles->hide();
+    this->hide();
 }
 
 void ControlPanel::showPanel()
 {
-
+    _playButton->show();
+    _positionSlider->show();
+    _volumeSlider->show();
+    _toogleFullscreen->show();
+    _toogleSubtitles->show();
+    this->show();
 }
 
 void ControlPanel::onStateChanged()
