@@ -21,7 +21,7 @@ public:
 
     void mouseDoubleClickEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *event);
-    void toogleFullScreen();
+    void toggleFullScreen();
     bool isFullScreen();
 private slots:
     void on_actionOpen_triggered();

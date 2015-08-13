@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     centralWidget()->setMouseTracking(true);
     this->setMouseTracking(true);
     ui->videoWidget->setMouseTracking(true);
-
     ui->videoWidget->setMediaPlayer(_player);
     ui->controlPanel->setMediaPlayer(_player);
 }
@@ -89,6 +88,7 @@ void MainWindow::on_Idle()
         _idleTimer->stop();
         ui->controlPanel->hidePanel();
         ui->menuBar->hide();
+        setCursor(Qt::BlankCursor);
         qInfo()<<"Idle mode";
     }
 }
@@ -99,9 +99,10 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     _idleTimer->start();
     ui->controlPanel->showPanel();
     ui->menuBar->show();
+    setCursor(Qt::ArrowCursor);
 }
 
-void MainWindow::toogleFullScreen()
+void MainWindow::toggleFullScreen()
 {
     if(isFullScreen())
     {
@@ -117,5 +118,5 @@ void MainWindow::toogleFullScreen()
 
 void MainWindow::mouseDoubleClickEvent( QMouseEvent *)
 {
-    toogleFullScreen();
+    toggleFullScreen();
 }

@@ -22,11 +22,11 @@ signals:
 public slots:
     void onStateChanged();
     void onPlayButtonClicked();
-    void onToogleFullScreen();
+    void onToggleFullScreen();
 private:
     QPushButton *_playButton; //play/pause button
-    QPushButton *_toogleFullscreen;
-    QPushButton *_toogleSubtitles;
+    QPushButton *_toggleFullscreen;
+    QPushButton *_toggleSubtitles;
     VlcWidgetSeek *_positionSlider;
     VlcWidgetVolumeSlider *_volumeSlider;
     VlcMediaPlayer *_player;

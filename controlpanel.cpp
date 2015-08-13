@@ -10,32 +10,32 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _playButton(0),
     _positionSlider(0),
     _volumeSlider(0),
-    _toogleFullscreen(0),
-    _toogleSubtitles(0),
+    _toggleFullscreen(0),
+    _toggleSubtitles(0),
     _player(0)
 {
     _playButton = new QPushButton(this);
     _positionSlider = new VlcWidgetSeek(this);
     _volumeSlider = new VlcWidgetVolumeSlider(this);
-    _toogleSubtitles = new QPushButton(this);
-    _toogleFullscreen = new QPushButton(this);
+    _toggleSubtitles = new QPushButton(this);
+    _toggleFullscreen = new QPushButton(this);
 
     QHBoxLayout *hlayout = new QHBoxLayout(this);
     hlayout->addWidget(_playButton);
     hlayout->addWidget(_positionSlider);
     hlayout->addWidget(_volumeSlider);
-    hlayout->addWidget(_toogleSubtitles);
-    hlayout->addWidget(_toogleFullscreen);
+    hlayout->addWidget(_toggleSubtitles);
+    hlayout->addWidget(_toggleFullscreen);
     this->setLayout(hlayout);
 
     _playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-    _toogleSubtitles->setIcon(style()->standardIcon(QStyle::SP_TitleBarMinButton));
-    _toogleFullscreen->setIcon(style()->standardIcon(QStyle::SP_TitleBarMaxButton));
+    _toggleSubtitles->setIcon(style()->standardIcon(QStyle::SP_TitleBarMinButton));
+    _toggleFullscreen->setIcon(style()->standardIcon(QStyle::SP_TitleBarMaxButton));
 
     connect(_playButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
-    connect(_toogleFullscreen,SIGNAL(clicked(bool)),SLOT(onToogleFullScreen()));
+    connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreen()));
     this->_volumeSlider->setVolume(50);
-    this->_toogleSubtitles->setDisabled(true);
+    this->_toggleSubtitles->setDisabled(true);
     this->setMinimumHeight(30);
     this->setMaximumHeight(40);
 }
@@ -53,8 +53,8 @@ void ControlPanel::hidePanel()
     _playButton->hide();
     _positionSlider->hide();
     _volumeSlider->hide();
-    _toogleFullscreen->hide();
-    _toogleSubtitles->hide();
+    _toggleFullscreen->hide();
+    _toggleSubtitles->hide();
     this->hide();
 }
 
@@ -63,8 +63,8 @@ void ControlPanel::showPanel()
     _playButton->show();
     _positionSlider->show();
     _volumeSlider->show();
-    _toogleFullscreen->show();
-    _toogleSubtitles->show();
+    _toggleFullscreen->show();
+    _toggleSubtitles->show();
     this->show();
 }
 
@@ -87,8 +87,8 @@ void ControlPanel::onPlayButtonClicked()
     qInfo()<<"onPlayButtonClicked::togglePause";
 }
 
-void ControlPanel::onToogleFullScreen()
+void ControlPanel::onToggleFullScreen()
 {
-    static_cast<MainWindow*>(parentWidget()->parentWidget())->toogleFullScreen();
+    static_cast<MainWindow*>(parentWidget()->parentWidget())->toggleFullScreen();
 }
 
