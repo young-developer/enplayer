@@ -3,6 +3,7 @@
 #include "vlc-qt/WidgetVolumeSlider.h"
 #include <vlc-qt/MediaPlayer.h>
 #include "vlc-qt/WidgetVideo.h"
+#include "Subtitles/subtitlepanel.h"
 #include "controlpanel.h"
 #include "mainwindow.h"
 
@@ -12,7 +13,8 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _volumeSlider(0),
     _toggleFullscreen(0),
     _toggleSubtitles(0),
-    _player(0)
+    _player(0),
+    _subPanel(0)
 {
     _playButton = new QPushButton(this);
     _positionSlider = new VlcWidgetSeek(this);
@@ -35,7 +37,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     connect(_playButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
     connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreen()));
     this->_volumeSlider->setVolume(50);
-    this->_toggleSubtitles->setDisabled(true);
+
     this->setMinimumHeight(30);
     this->setMaximumHeight(40);
 }
@@ -46,6 +48,12 @@ void ControlPanel::setMediaPlayer(VlcMediaPlayer *player)
     _volumeSlider->setMediaPlayer(player);
     _player = player;
     connect(_player,SIGNAL(stateChanged()),SLOT(onStateChanged()));
+}
+
+void ControlPanel::setSubtitlePanel(SubtitlePanel *subPanel)
+{
+    _subPanel = subPanel;
+    connect(_toggleSubtitles,SIGNAL(clicked(bool)),SLOT(onToggleSubtitlesBtnClicked()));
 }
 
 void ControlPanel::hidePanel()
@@ -79,6 +87,11 @@ void ControlPanel::onStateChanged()
             _playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
             break;
     }
+}
+
+void ControlPanel::onToggleSubtitlesBtnClicked()
+{
+    _subPanel->togglePanel();
 }
 
 void ControlPanel::onPlayButtonClicked()

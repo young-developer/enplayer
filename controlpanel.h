@@ -8,6 +8,7 @@ class VlcWidgetSeek;
 class VlcWidgetVolumeSlider;
 class VlcMediaPlayer;
 class QPushButton;
+class SubtitlePanel;
 
 class ControlPanel : public QWidget
 {
@@ -15,12 +16,14 @@ class ControlPanel : public QWidget
 public:
     explicit ControlPanel(QWidget *parent = 0);
     void setMediaPlayer(VlcMediaPlayer *player);
+    void setSubtitlePanel(SubtitlePanel *subPanel);
     void hidePanel();
     void showPanel();
 signals:
 
 public slots:
     void onStateChanged();
+    void onToggleSubtitlesBtnClicked();
     void onPlayButtonClicked();
     void onToggleFullScreen();
 private:
@@ -30,6 +33,7 @@ private:
     VlcWidgetSeek *_positionSlider;
     VlcWidgetVolumeSlider *_volumeSlider;
     VlcMediaPlayer *_player;
+    SubtitlePanel *_subPanel;
 };
 
 #endif // CONTROLPANEL_H
