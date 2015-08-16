@@ -10,6 +10,10 @@ class MainWindow;
 class VlcInstance;
 class VlcMedia;
 class VlcMediaPlayer;
+class VlcVideo;
+class VlcControlVideo;
+class VlcMetaManager;
+class SubtitlePanel;
 
 class MainWindow : public QMainWindow
 {
@@ -19,10 +23,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void mouseDoubleClickEvent(QMouseEvent *e);
-    void mouseMoveEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void resizeEvent(QResizeEvent *);
     void toggleFullScreen();
     bool isFullScreen();
+signals:
+       void resized();
 private slots:
     void on_actionOpen_triggered();
 
@@ -35,8 +42,15 @@ private:
     QTimer *_idleTimer;
     Ui::MainWindow *ui;
     VlcInstance *_instance;
+    VlcVideo *_vlcVideo;
+    VlcControlVideo *_controlVideo;
     VlcMedia *_media;
     VlcMediaPlayer *_player;
+    SubtitlePanel *_subPanel;
+
+    // QWidget interface
+protected:
+
 };
 
 #endif // MAINWINDOW_H

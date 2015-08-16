@@ -8,14 +8,19 @@
 #include <vlc-qt/Instance.h>
 #include <vlc-qt/Media.h>
 #include <vlc-qt/MediaPlayer.h>
+#include <vlc-qt/ControlVideo.h>
+#include <vlc-qt/MetaManager.h>
 
+#include "Subtitles/subtitlepanel.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    _media(0)
+    _media(0),
+    _vlcVideo(_player->video()),
+    _controlVideo(0)
 {
     ui->setupUi(this);
     setWindowTitle("EN Player v."+QString(VERSION_NUMBER));
@@ -27,11 +32,13 @@ MainWindow::MainWindow(QWidget *parent) :
     _idleTimer->setInterval(3000);//idle interval 3sec
     connect(_idleTimer, SIGNAL(timeout()), this, SLOT(on_Idle()));
     _idleTimer->start();
+    _subPanel = new SubtitlePanel(this);
     centralWidget()->setMouseTracking(true);
     this->setMouseTracking(true);
     ui->videoWidget->setMouseTracking(true);
     ui->videoWidget->setMediaPlayer(_player);
     ui->controlPanel->setMediaPlayer(_player);
+    ui->controlPanel->setSubtitlePanel(_subPanel);
 }
 
 MainWindow::~MainWindow()
@@ -40,6 +47,7 @@ MainWindow::~MainWindow()
     delete _player;
     delete _media;
     delete _instance;
+    delete _subPanel;
     delete ui;
 }
 
@@ -93,13 +101,18 @@ void MainWindow::on_Idle()
     }
 }
 
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
+void MainWindow::mouseMoveEvent(QMouseEvent *)
 {
     _idleTimer->stop(); // reset timer
     _idleTimer->start();
     ui->controlPanel->showPanel();
     ui->menuBar->show();
     setCursor(Qt::ArrowCursor);
+}
+
+void MainWindow::resizeEvent(QResizeEvent *)
+{
+    emit resized();
 }
 
 void MainWindow::toggleFullScreen()
@@ -116,7 +129,7 @@ void MainWindow::toggleFullScreen()
     }
 }
 
-void MainWindow::mouseDoubleClickEvent( QMouseEvent *)
+void MainWindow::mouseDoubleClickEvent(QMouseEvent *)
 {
     toggleFullScreen();
 }
