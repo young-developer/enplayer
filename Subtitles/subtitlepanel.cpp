@@ -1,5 +1,6 @@
 #include "Subtitles/subtitlepanel.h"
 #include "Subtitles/subtitlelabel.h"
+#include "flowlayout.h"
 #include "mainwindow.h"
 #include <QMouseEvent>
 #include <QApplication>
@@ -22,49 +23,46 @@ void SubtitlePanel::Init()
     setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute( Qt::WA_QuitOnClose, false );
-    this->setMaximumHeight(80);
-    this->setMinimumHeight(40);
-    this->setMinimumWidth(static_cast<MainWindow*>(parent())->width()-40);
+    setMouseTracking(true);
+
+    setMaximumHeight(80);
+    setMinimumHeight(static_cast<MainWindow*>(parent())->height()-250);
+    setMinimumWidth(static_cast<MainWindow*>(parent())->width()-40);
+    setMaximumWidth(400);
     move(static_cast<MainWindow*>(parent())->geometry().bottomLeft().rx()+20,
-         static_cast<MainWindow*>(parent())->geometry().bottomLeft().ry()-100);
-    this->setMouseTracking(true);
+         static_cast<MainWindow*>(parent())->geometry().bottomLeft().ry()-120);
 
-    _label = new SubtitleLabel(this);
-    _label->setStyleSheet("color:black;font-size:25px;");
-    _label->setText("OK");
-
-    connect(static_cast<MainWindow*>(parent()),SIGNAL(resized()),SLOT(onResize()));
-    connect(_label,SIGNAL(mouseEntered()),SLOT(onMouseEnter_Translate()));
-    connect(_label,SIGNAL(mouseLeaved()),SLOT(onMouseLeave_Translate()));
+    FlowLayout *flayout = new FlowLayout(this);
+    setLayout(flayout);
 }
 
 void SubtitlePanel::togglePanel()
 {
-    if(this->isHidden())
-    {
-        show();
-    }
-    else
-    {
-        hide();
-    }
-}
-
-void SubtitlePanel::onMouseEnter_Translate()
-{
-   SubtitleLabel *sub = static_cast<SubtitleLabel*>(sender());
-   sub->setStyleSheet("color:red;font-size:26px;text-decoration:underline;");
-}
-
-void SubtitlePanel::onMouseLeave_Translate()
-{
-   SubtitleLabel *sub = static_cast<SubtitleLabel*>(sender());
-   sub->setStyleSheet("color:black;font-size:26px;");
+    isHidden()?show():hide();
 }
 
 void SubtitlePanel::onResize()
 {
     qInfo()<<"Main window resized!";
+}
+
+void SubtitlePanel::updateSubtitles()
+{
+    foreach(SubtitleLabel *sub, _subtitles)
+    {
+        layout()->addWidget(sub);
+        sub->show();
+    }
+}
+
+QList<SubtitleLabel *> SubtitlePanel::getSubtitles()
+{
+    return _subtitles;
+}
+
+void SubtitlePanel::setSubtitles(QList<SubtitleLabel *> subs)
+{
+    _subtitles = subs;
 }
 
 void SubtitlePanel::mouseMoveEvent(QMouseEvent *event)
@@ -90,6 +88,7 @@ void SubtitlePanel::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         currentDragPosition = event->globalPos() - frameGeometry().topLeft();
+
         event->accept();
     }
     else
@@ -97,6 +96,7 @@ void SubtitlePanel::mousePressEvent(QMouseEvent *event)
     {
         currentDragPosition = event->globalPos();
         dragSize = size();
+        setMaximumWidth(static_cast<MainWindow*>(parent())->width()-50);
         event->accept();
     }
 }

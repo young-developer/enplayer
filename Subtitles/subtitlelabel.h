@@ -6,9 +6,10 @@
 class SubtitleLabel : public QLabel
 {
     Q_OBJECT
+    void Init();
 public:
     explicit SubtitleLabel(QWidget *parent = 0);
-
+    SubtitleLabel(QString text, QWidget *parent = 0);
 signals:
     void clicked();
     void doubleClicked();

@@ -79,14 +79,7 @@ void MainWindow::on_actionRead_Me_triggered()
 
 bool MainWindow::isFullScreen()
 {
-    if(windowState() == Qt::WindowFullScreen)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return windowState() == Qt::WindowFullScreen?true:false;
 }
 
 void MainWindow::on_Idle()

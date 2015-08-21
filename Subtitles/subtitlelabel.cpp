@@ -3,7 +3,20 @@
 
 SubtitleLabel::SubtitleLabel(QWidget *parent) : QLabel(parent)
 {
+    Init();
+}
+
+SubtitleLabel::SubtitleLabel(QString text, QWidget *parent):QLabel(parent)
+{
+    Init();
+    setText(text);
+}
+
+void SubtitleLabel::Init()
+{
     setMouseTracking(true);
+    QFont serifFont("Times", 16, QFont::Bold);
+    setFont(serifFont);
 }
 
 void SubtitleLabel::mouseDoubleClickEvent(QMouseEvent *)
@@ -24,11 +37,13 @@ void SubtitleLabel::mouseMoveEvent(QMouseEvent *event)
 
 void SubtitleLabel::enterEvent(QEvent *)
 {
+    setStyleSheet("color:red;");
     emit mouseEntered();
 }
 
 void SubtitleLabel::leaveEvent(QEvent *)
 {
+    setStyleSheet("color:white;");
     emit mouseLeaved();
 }
 

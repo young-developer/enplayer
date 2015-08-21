@@ -11,18 +11,18 @@ public:
     explicit SubtitlePanel(QWidget *parent = 0);
     void Init();
     void togglePanel();
+    void updateSubtitles();
+    QList<SubtitleLabel*> getSubtitles();
+    void setSubtitles(QList<SubtitleLabel*> subs);
 signals:
 
 public slots:
-    void onMouseEnter_Translate();
-    void onMouseLeave_Translate();
     void onResize();
 private:
     //SubtitleParser *_parser;
     QPoint currentDragPosition;
     QSize dragSize;
-    QList<SubtitleLabel*> subtitleWords;
-    SubtitleLabel *_label;
+    QList<SubtitleLabel*> _subtitles;
 protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
