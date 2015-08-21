@@ -17,13 +17,13 @@ SOURCES += main.cpp\
     controlpanel.cpp \
     Subtitles/subtitlepanel.cpp \
     Subtitles/subtitlelabel.cpp \
-    Subtitles/subtitleparser.cpp
+    flowlayout.cpp
 
 HEADERS  += mainwindow.h \
     controlpanel.h \
     Subtitles/subtitlepanel.h \
     Subtitles/subtitlelabel.h \
-    Subtitles/subtitleparser.h
+    flowlayout.h
 
 FORMS    += mainwindow.ui
 
