@@ -4,6 +4,7 @@ ___
 #### Requirements
 - QT 5.5.0  http://www.qt.io/developers/
 - LibVLC-Qt  https://github.com/vlc-qt/
+- LibSub-Parser https://github.com/young-developer/subtitle-parser
 
 ___
 #### For developers
