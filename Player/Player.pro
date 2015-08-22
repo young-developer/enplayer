@@ -32,4 +32,5 @@ FORMS    += mainwindow.ui
 # Edit below for custom library location
 LIBS     += -LC:\Qt\libvlc-qt\lib -lvlc-qt -lvlc-qt-widgets
 INCLUDEPATH += C:\Qt\libvlc-qt\include
-INCLUDEPATH += E:\Repositories\SubParser
+
+INCLUDEPATH += E:\Repositories\SubParser\

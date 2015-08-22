@@ -1,7 +1,7 @@
 #include <vlc-qt/MediaPlayer.h>
 #include "Subtitles/subtitlelabel.h"
 #include "SubtitleParser.h"
-#include "SubtitleParserFactory.h"
+//#include "SubtitleParserFactory.h"
 #include "Subtitles/subtitlepanel.h"
 #include "subtitlemanager.h"
 
