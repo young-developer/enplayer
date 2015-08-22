@@ -1,6 +1,6 @@
 #include "Subtitles/subtitlepanel.h"
 #include "Subtitles/subtitlelabel.h"
-#include "flowlayout.h"
+#include "Layout/flowlayout.h"
 #include "mainwindow.h"
 #include <QMouseEvent>
 #include <QApplication>

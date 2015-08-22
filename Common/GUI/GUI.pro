@@ -5,14 +5,17 @@
 #-------------------------------------------------
 
 QT       -= gui
-
+QT       += core widgets
 TARGET = GUI
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES += gui.cpp
+SOURCES += gui.cpp \
+    Layout/flowlayout.cpp
 
-HEADERS += gui.h
+HEADERS += gui.h \
+    Layout/flowlayout.h
+
 unix {
     target.path = /usr/lib
     INSTALLS += target
