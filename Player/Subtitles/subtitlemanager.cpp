@@ -1,8 +1,6 @@
 #include <vlc-qt/MediaPlayer.h>
-#include "Subtitles/subtitlelabel.h"
-#include "SubtitleParser.h"
-//#include "SubtitleParserFactory.h"
-#include "Subtitles/subtitlepanel.h"
+#include "Subtitle/subtitlelabel.h"
+#include "Subtitle/subtitlepanel.h"
 #include "subtitlemanager.h"
 
 SubtitleManager::SubtitleManager(SubtitlePanel *subPanel, VlcMediaPlayer *player)
@@ -35,8 +33,8 @@ void SubtitleManager::loadSubtitleFile(std::string fileName)
 
 SubtitleManager::~SubtitleManager()
 {
-    if(_subParser)
-        delete _subParser;
+    //if(_subParser)
+       // delete _subParser;
 }
 
 void SubtitleManager::updateSubtitles()

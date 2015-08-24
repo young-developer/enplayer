@@ -11,7 +11,7 @@
 #include <vlc-qt/ControlVideo.h>
 #include <vlc-qt/MetaManager.h>
 
-#include "Subtitles/subtitlepanel.h"
+#include "Subtitle/subtitlepanel.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 

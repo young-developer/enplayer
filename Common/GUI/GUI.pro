@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT       -= gui-common
 QT       += core widgets
 TARGET = GUI
 TEMPLATE = lib

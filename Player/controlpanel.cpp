@@ -3,7 +3,7 @@
 #include "vlc-qt/WidgetVolumeSlider.h"
 #include <vlc-qt/MediaPlayer.h>
 #include "vlc-qt/WidgetVideo.h"
-#include "Subtitles/subtitlepanel.h"
+#include "Subtitle/subtitlepanel.h"
 #include "controlpanel.h"
 #include "mainwindow.h"
 
