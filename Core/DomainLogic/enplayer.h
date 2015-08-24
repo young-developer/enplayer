@@ -18,6 +18,7 @@ public:
     explicit ENPlayer(QObject *parent = 0);
     ~ENPlayer();
 private:
+    QStringList ENPlayer::args();
     VlcInstance *_instance;
     VlcVideo *_vlcVideo;
     VlcMedia *_media;

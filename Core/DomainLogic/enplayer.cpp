@@ -10,10 +10,9 @@
 ENPlayer::ENPlayer(QObject *parent): QObject(parent),
     _media(0)
 {
-    _instance = new VlcInstance(VlcCommon::args(),this);
+    _instance = new VlcInstance(ENPlayer::args(),this);
     _vlcPlayer = new VlcMediaPlayer(_instance);
     _vlcVideo = new VlcVideo(_vlcPlayer);
-    _vlcVideo->setSubtitle(-1);
 }
 
 ENPlayer::~ENPlayer()
@@ -26,6 +25,25 @@ ENPlayer::~ENPlayer()
         delete _vlcPlayer;
     if(_instance)
         delete _instance;
+}
+
+QStringList ENPlayer::args()
+{
+    QStringList args;
+
+    args << "--intf=dummy"
+         << "--no-media-library"
+         << "--no-stats"
+         << "--no-osd"
+         << "--no-sub-autodetect-file"
+         << "--no-loop"
+         << "--no-video-title-show"
+#if defined(Q_OS_DARWIN)
+         << "--vout=macosx"
+#endif
+         << "--drop-late-frames";
+
+    return args;
 }
 
 void ENPlayer::openFile(QString fileName)
