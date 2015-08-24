@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       -= gui-common
-QT       += core widgets
+QT       += widgets
 TARGET = GUI
 TEMPLATE = lib
 CONFIG += staticlib

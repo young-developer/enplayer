@@ -4,49 +4,41 @@
 #include <QFileDialog>
 #include <QTimer>
 
-#include <vlc-qt/Common.h>
-#include <vlc-qt/Instance.h>
-#include <vlc-qt/Media.h>
-#include <vlc-qt/MediaPlayer.h>
-#include <vlc-qt/ControlVideo.h>
-#include <vlc-qt/MetaManager.h>
-
-#include "Subtitle/subtitlepanel.h"
+#include "enplayer.h"
+#include "controlpanel.h"
+#include "Subtitles/subtitlepanel.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    _media(0),
-    _vlcVideo(_player->video()),
-    _controlVideo(0)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     setWindowTitle("EN Player v."+QString(VERSION_NUMBER));
 
-    _instance = new VlcInstance(VlcCommon::args(), this);
-    _player = new VlcMediaPlayer(_instance);
-    _player->setVideoWidget(ui->videoWidget);
+    centralWidget()->setMouseTracking(true);
+    setMouseTracking(true);
+    ui->videoWidget->setMouseTracking(true);
+
     _idleTimer = new QTimer(this);
     _idleTimer->setInterval(3000);//idle interval 3sec
     connect(_idleTimer, SIGNAL(timeout()), this, SLOT(on_Idle()));
     _idleTimer->start();
+
+    _enPlayer = new ENPlayer();
     _subPanel = new SubtitlePanel(this);
-    centralWidget()->setMouseTracking(true);
-    this->setMouseTracking(true);
-    ui->videoWidget->setMouseTracking(true);
-    ui->videoWidget->setMediaPlayer(_player);
-    ui->controlPanel->setMediaPlayer(_player);
+    _enPlayer->setVideoWidget(ui->videoWidget);
+    ui->videoWidget->setMediaPlayer(_enPlayer->vlcPlayer());
+    ui->controlPanel->setMediaPlayer(_enPlayer->vlcPlayer());
     ui->controlPanel->setSubtitlePanel(_subPanel);
+    connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));
 }
 
 MainWindow::~MainWindow()
 {
     qInfo()<<("Application was closed");
-    delete _player;
-    delete _media;
-    delete _instance;
+    delete _enPlayer;
     delete _subPanel;
     delete ui;
 }
@@ -59,10 +51,8 @@ void MainWindow::on_actionOpen_triggered()
                                              tr("Multimedia files(*)"));
     if (fileName.isEmpty())
             return;
-    _media = new VlcMedia(fileName, true, _instance);
 
-    _player->open(_media);
-    _player->play();
+    _enPlayer->openFile(fileName);
     qInfo()<<("Open file: "+fileName);
 }
 
@@ -110,16 +100,7 @@ void MainWindow::resizeEvent(QResizeEvent *)
 
 void MainWindow::toggleFullScreen()
 {
-    if(isFullScreen())
-    {
-        showNormal();
-        qInfo()<<"onToogleFullScreen::Normal mode";
-    }
-    else
-    {
-        showFullScreen();
-        qInfo()<<"onToogleFullScreen::Fullscreen mode";
-    }
+    isFullScreen()?showNormal():showFullScreen();
 }
 
 void MainWindow::mouseDoubleClickEvent(QMouseEvent *)

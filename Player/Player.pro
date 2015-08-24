@@ -13,13 +13,9 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
-    controlpanel.cpp \
-    Subtitles/subtitlemanager.cpp
+        mainwindow.cpp
 
-HEADERS  += mainwindow.h \
-    controlpanel.h \
-    Subtitles/subtitlemanager.h
+HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
@@ -47,3 +43,16 @@ unix|win32: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt-widgets
 
 INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
 DEPENDPATH += $$PWD/../Core/3dparty/libvlc-qt/include
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/release/ -lDomainLogic
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/debug/ -lDomainLogic
+else:unix: LIBS += -L$$OUT_PWD/../Core/DomainLogic/ -lDomainLogic
+
+INCLUDEPATH += $$PWD/../Core/DomainLogic
+DEPENDPATH += $$PWD/../Core/DomainLogic
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/libDomainLogic.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/libDomainLogic.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/DomainLogic.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/DomainLogic.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/libDomainLogic.a

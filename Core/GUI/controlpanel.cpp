@@ -3,9 +3,9 @@
 #include "vlc-qt/WidgetVolumeSlider.h"
 #include <vlc-qt/MediaPlayer.h>
 #include "vlc-qt/WidgetVideo.h"
-#include "Subtitle/subtitlepanel.h"
+#include "Subtitles/subtitlepanel.h"
 #include "controlpanel.h"
-#include "mainwindow.h"
+//#include "mainwindow.h"
 
 ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _playButton(0),
@@ -35,7 +35,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _toggleFullscreen->setIcon(style()->standardIcon(QStyle::SP_TitleBarMaxButton));
 
     connect(_playButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
-    connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreen()));
+    connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreenBtnClicked()));
     this->_volumeSlider->setVolume(50);
 
     this->setMinimumHeight(30);
@@ -100,8 +100,8 @@ void ControlPanel::onPlayButtonClicked()
     qInfo()<<"onPlayButtonClicked::togglePause";
 }
 
-void ControlPanel::onToggleFullScreen()
+void ControlPanel::onToggleFullScreenBtnClicked()
 {
-    static_cast<MainWindow*>(parentWidget()->parentWidget())->toggleFullScreen();
+    emit toggleFullScreen();
 }
 

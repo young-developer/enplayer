@@ -4,21 +4,21 @@
 #
 #-------------------------------------------------
 
-QT       -= gui-core
-
-QT += core widgets
+QT += widgets
 
 TARGET = GUI
 TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += gui.cpp \
-    Subtitle/subtitlepanel.cpp \
-    Subtitle/subtitlelabel.cpp
+    controlpanel.cpp \
+    Subtitles/subtitlepanel.cpp \
+    Subtitles/subtitlelabel.cpp
 
 HEADERS += gui.h \
-    Subtitle/subtitlepanel.h \
-    Subtitle/subtitlelabel.h
+    controlpanel.h \
+    Subtitles/subtitlepanel.h \
+    Subtitles/subtitlelabel.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
@@ -37,3 +37,13 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../C
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/GUI/release/GUI.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/GUI/debug/GUI.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../../Common/GUI/libGUI.a
+
+unix|win32: LIBS += -L$$PWD/../3dparty/libvlc-qt/lib/ -lvlc-qt
+
+INCLUDEPATH += $$PWD/../3dparty/libvlc-qt/include
+DEPENDPATH += $$PWD/../3dparty/libvlc-qt/include
+
+unix|win32: LIBS += -L$$PWD/../3dparty/libvlc-qt/lib/ -lvlc-qt-widgets
+
+INCLUDEPATH += $$PWD/../3dparty/libvlc-qt/include
+DEPENDPATH += $$PWD/../3dparty/libvlc-qt/include

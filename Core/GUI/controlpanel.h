@@ -20,12 +20,12 @@ public:
     void hidePanel();
     void showPanel();
 signals:
-
+    void toggleFullScreen();
 public slots:
     void onStateChanged();
     void onToggleSubtitlesBtnClicked();
     void onPlayButtonClicked();
-    void onToggleFullScreen();
+    void onToggleFullScreenBtnClicked();
 private:
     QPushButton *_playButton; //play/pause button
     QPushButton *_toggleFullscreen;

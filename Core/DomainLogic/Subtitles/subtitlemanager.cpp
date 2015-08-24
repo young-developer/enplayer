@@ -1,6 +1,6 @@
 #include <vlc-qt/MediaPlayer.h>
-#include "Subtitle/subtitlelabel.h"
-#include "Subtitle/subtitlepanel.h"
+#include "Subtitles/subtitlelabel.h"
+#include "Subtitles/subtitlepanel.h"
 #include "subtitlemanager.h"
 
 SubtitleManager::SubtitleManager(SubtitlePanel *subPanel, VlcMediaPlayer *player)
