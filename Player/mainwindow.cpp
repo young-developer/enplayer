@@ -72,6 +72,23 @@ bool MainWindow::isFullScreen()
     return windowState() == Qt::WindowFullScreen?true:false;
 }
 
+bool MainWindow::event(QEvent *event)
+{
+    switch (event->type())
+    {
+    case QEvent::WindowActivate:
+    case QEvent::WindowStateChange:
+    case QEvent::Resize:
+    case QEvent::Move:
+        _subPanel->panelSizeMove();
+        break;
+    default:
+        break;
+    }
+
+    return QMainWindow::event(event);
+}
+
 void MainWindow::on_Idle()
 {
     if(isFullScreen())

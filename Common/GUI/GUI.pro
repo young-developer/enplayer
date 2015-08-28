@@ -5,15 +5,17 @@
 #-------------------------------------------------
 
 QT       += widgets
-TARGET = GUI
+TARGET = GUI-cmn
 TEMPLATE = lib
 CONFIG += staticlib
 
-SOURCES += gui.cpp \
-    Layout/flowlayout.cpp
+SOURCES += \
+    Layout/flowlayout.cpp \
+    gui-cmn.cpp
 
-HEADERS += gui.h \
-    Layout/flowlayout.h
+HEADERS += \
+    Layout/flowlayout.h \
+    gui-cmn.h
 
 unix {
     target.path = /usr/lib

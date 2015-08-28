@@ -46,8 +46,7 @@ private:
     Ui::MainWindow *ui;
     ENPlayer *_enPlayer;
     SubtitlePanel *_subPanel;
-
-    // QWidget interface
+    bool event(QEvent *event);
 protected:
 
 };

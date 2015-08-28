@@ -2,11 +2,11 @@
 #define GUI_H
 
 
-class GUI
+class GUI_core
 {
 
 public:
-    GUI();
+    GUI_core();
 };
 
 #endif // GUI_H

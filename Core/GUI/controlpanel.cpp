@@ -5,7 +5,7 @@
 #include "vlc-qt/WidgetVideo.h"
 #include "Subtitles/subtitlepanel.h"
 #include "controlpanel.h"
-//#include "mainwindow.h"
+
 
 ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _playButton(0),

@@ -21,19 +21,6 @@ FORMS    += mainwindow.ui
 
 # Edit below for custom library location
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/GUI/release/ -lGUI
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Core/GUI/debug/ -lGUI
-else:unix: LIBS += -L$$OUT_PWD/../Core/GUI/ -lGUI
-
-INCLUDEPATH += $$PWD/../Core/GUI
-DEPENDPATH += $$PWD/../Core/GUI
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/release/libGUI.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/debug/libGUI.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/release/GUI.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/debug/GUI.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/libGUI.a
-
 unix|win32: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt
 
 INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
@@ -43,6 +30,20 @@ unix|win32: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt-widgets
 
 INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
 DEPENDPATH += $$PWD/../Core/3dparty/libvlc-qt/include
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/GUI/release/ -lGUI-core
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Core/GUI/debug/ -lGUI-core
+else:unix: LIBS += -L$$OUT_PWD/../Core/GUI/ -lGUI-core
+
+INCLUDEPATH += $$PWD/../Core/GUI
+DEPENDPATH += $$PWD/../Core/GUI
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/release/libGUI-core.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/debug/libGUI-core.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/release/GUI-core.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/debug/GUI-core.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/libGUI-core.a
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/release/ -lDomainLogic
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/debug/ -lDomainLogic
@@ -56,3 +57,17 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/DomainLogic.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/DomainLogic.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/libDomainLogic.a
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
+else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
+
+INCLUDEPATH += $$PWD/../Common/GUI
+DEPENDPATH += $$PWD/../Common/GUI
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a

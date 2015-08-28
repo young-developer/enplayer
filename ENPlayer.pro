@@ -1,6 +1,8 @@
 TEMPLATE = subdirs
 
+CONFIG += ordered
+
 SUBDIRS += \
-    Core \
     Common \
+    Core \
     Player

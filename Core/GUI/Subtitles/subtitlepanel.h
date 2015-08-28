@@ -14,12 +14,15 @@ public:
     void updateSubtitles();
     QList<SubtitleLabel*> getSubtitles();
     void setSubtitles(QList<SubtitleLabel*> subs);
+    void panelSizeMove();
+    bool isFixed();
 signals:
 
 public slots:
-    void onResize();
+
 private:
     //SubtitleParser *_parser;
+    bool _fixed;
     QPoint currentDragPosition;
     QSize dragSize;
     QList<SubtitleLabel*> _subtitles;
