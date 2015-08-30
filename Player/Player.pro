@@ -3,8 +3,8 @@
 # Project created by QtCreator 2015-08-01T16:33:02
 # Project Semantic Versioning http://semver.org/
 #-------------------------------------------------
-VERSION = 0.4.1
-DEFINES += VERSION_NUMBER=\\\"0.4.1\\\"
+VERSION = 0.4.4
+DEFINES += VERSION_NUMBER=\\\"0.4.4\\\"
 
 QT       += core gui widgets
 
