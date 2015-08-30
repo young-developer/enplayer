@@ -37,8 +37,3 @@ SubtitleManager::~SubtitleManager()
        // delete _subParser;
 }
 
-void SubtitleManager::updateSubtitles()
-{
-    _subPanel->updateSubtitles();
-}
-

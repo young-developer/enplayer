@@ -8,10 +8,8 @@ class SubtitlePanel : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SubtitlePanel(QWidget *parent = 0);
-    void Init();
+    explicit SubtitlePanel(QWidget *parent = 0, bool isFixed = true);
     void togglePanel();
-    void updateSubtitles();
     QList<SubtitleLabel*> getSubtitles();
     void setSubtitles(QList<SubtitleLabel*> subs);
     void panelSizeMove();
@@ -21,11 +19,14 @@ signals:
 public slots:
 
 private:
-    //SubtitleParser *_parser;
     bool _fixed;
     QPoint currentDragPosition;
     QSize dragSize;
     QList<SubtitleLabel*> _subtitles;
+private:
+    void Init();
+    void renderSubtitles();
+    void clearSubtitles();
 protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);

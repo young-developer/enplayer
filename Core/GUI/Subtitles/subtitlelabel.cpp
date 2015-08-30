@@ -4,6 +4,7 @@
 SubtitleLabel::SubtitleLabel(QWidget *parent) : QLabel(parent)
 {
     Init();
+    setText("Empty label");
 }
 
 SubtitleLabel::SubtitleLabel(QString text, QWidget *parent):QLabel(parent)
@@ -29,9 +30,9 @@ void SubtitleLabel::mousePressEvent(QMouseEvent *)
     emit clicked();
 }
 
-void SubtitleLabel::mouseMoveEvent(QMouseEvent *event)
+void SubtitleLabel::mouseMoveEvent(QMouseEvent *)
 {
-    Q_UNUSED(event);
+    //Q_UNUSED(event);
     emit hovered();
 }
 

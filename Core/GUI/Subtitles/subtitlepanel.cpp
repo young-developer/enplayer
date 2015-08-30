@@ -10,7 +10,7 @@
 #include <QStyleOption>
 #include <QDragEnterEvent>
 
-SubtitlePanel::SubtitlePanel(QWidget *parent) : QWidget(parent),_fixed(true)
+SubtitlePanel::SubtitlePanel(QWidget *parent,bool isFixed) : QWidget(parent),_fixed(isFixed)
 {
     Init();
 }
@@ -64,15 +64,6 @@ void SubtitlePanel::togglePanel()
     isHidden()?show():hide();
 }
 
-void SubtitlePanel::updateSubtitles()
-{
-    foreach(SubtitleLabel *sub, _subtitles)
-    {
-        layout()->addWidget(sub);
-        sub->show();
-    }
-}
-
 QList<SubtitleLabel *> SubtitlePanel::getSubtitles()
 {
     return _subtitles;
@@ -80,7 +71,27 @@ QList<SubtitleLabel *> SubtitlePanel::getSubtitles()
 
 void SubtitlePanel::setSubtitles(QList<SubtitleLabel *> subs)
 {
+    clearSubtitles();
     _subtitles = subs;
+    renderSubtitles();
+}
+
+void SubtitlePanel::renderSubtitles()
+{
+    foreach(SubtitleLabel *sub, _subtitles)
+    {
+        layout()->addWidget(sub);
+    }
+}
+
+void SubtitlePanel::clearSubtitles()
+{
+    foreach(SubtitleLabel *sub, _subtitles)
+    {
+        if(sub)
+            delete sub;
+    }
+    _subtitles.clear();
 }
 
 void SubtitlePanel::mouseMoveEvent(QMouseEvent *event)

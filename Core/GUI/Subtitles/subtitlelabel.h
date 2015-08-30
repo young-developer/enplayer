@@ -9,7 +9,7 @@ class SubtitleLabel : public QLabel
     void Init();
 public:
     explicit SubtitleLabel(QWidget *parent = 0);
-    SubtitleLabel(QString text, QWidget *parent = 0);
+    explicit SubtitleLabel(QString text, QWidget *parent = 0);
 signals:
     void clicked();
     void doubleClicked();
@@ -18,14 +18,10 @@ signals:
     void mouseLeaved();
 public slots:
 
-    // QWidget interface
 protected:
     void mouseDoubleClickEvent(QMouseEvent *);
     void mousePressEvent(QMouseEvent *);
-    void mouseMoveEvent(QMouseEvent *event);
-
-    // QWidget interface
-protected:
+    void mouseMoveEvent(QMouseEvent *);
     void enterEvent(QEvent *);
     void leaveEvent(QEvent *);
 };
