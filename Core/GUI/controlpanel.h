@@ -3,12 +3,12 @@
 
 #include <QObject>
 #include <QtWidgets>
-
+#include "vlc-qt/WidgetVideo.h"
 class VlcWidgetSeek;
 class VlcWidgetVolumeSlider;
 class VlcMediaPlayer;
+
 class QPushButton;
-class SubtitlePanel;
 
 class ControlPanel : public QWidget
 {
@@ -16,13 +16,14 @@ class ControlPanel : public QWidget
 public:
     explicit ControlPanel(QWidget *parent = 0);
     void setMediaPlayer(VlcMediaPlayer *player);
-    void setSubtitlePanel(SubtitlePanel *subPanel);
     void hidePanel();
     void showPanel();
 signals:
     void toggleFullScreen();
+    void toggleSubtitlePanel();
+    void playButtonClicked();
 public slots:
-    void onStateChanged();
+    void onStateChanged(Vlc::State state);
     void onToggleSubtitlesBtnClicked();
     void onPlayButtonClicked();
     void onToggleFullScreenBtnClicked();
@@ -32,8 +33,6 @@ private:
     QPushButton *_toggleSubtitles;
     VlcWidgetSeek *_positionSlider;
     VlcWidgetVolumeSlider *_volumeSlider;
-    VlcMediaPlayer *_player;
-    SubtitlePanel *_subPanel;
 };
 
 #endif // CONTROLPANEL_H

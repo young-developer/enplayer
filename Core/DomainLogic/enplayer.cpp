@@ -1,18 +1,23 @@
 #include <vlc-qt/Common.h>
-#include <vlc-qt/VideoDelegate.h>
 #include <vlc-qt/Instance.h>
 #include <vlc-qt/Media.h>
 #include <vlc-qt/Video.h>
 #include <vlc-qt/MediaPlayer.h>
 
+#include "Subtitles/subtitlepanel.h"
+#include "controlpanel.h"
+
 #include "enplayer.h"
 
-ENPlayer::ENPlayer(QObject *parent): QObject(parent),
+ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QObject *parent): QObject(parent),
     _media(0)
 {
     _instance = new VlcInstance(ENPlayer::args(),this);
     _vlcPlayer = new VlcMediaPlayer(_instance);
     _vlcVideo = new VlcVideo(_vlcPlayer);
+    _vlcPlayer->setVideoWidget(videoWidget);
+    videoWidget->setMediaPlayer(vlcPlayer());
+    connect (vlcPlayer(), SIGNAL(stateChanged()),SLOT(onStateChanged())) ;
 }
 
 ENPlayer::~ENPlayer()
@@ -25,6 +30,11 @@ ENPlayer::~ENPlayer()
         delete _vlcPlayer;
     if(_instance)
         delete _instance;
+}
+
+void ENPlayer::onStateChanged()
+{
+    emit stateChanged(vlcPlayer()->state());
 }
 
 QStringList ENPlayer::args()
@@ -46,16 +56,25 @@ QStringList ENPlayer::args()
     return args;
 }
 
+void ENPlayer::setControlPanel(ControlPanel *ctrlPanel)
+{
+    _ctrlPanel = ctrlPanel;
+    _ctrlPanel->setMediaPlayer(vlcPlayer());
+    connect(_ctrlPanel,SIGNAL(playButtonClicked()),vlcPlayer(),SLOT(togglePause()));
+    connect(this,SIGNAL(stateChanged(Vlc::State)),_ctrlPanel,SLOT(onStateChanged(Vlc::State)));
+}
+
+void ENPlayer::setSubtitlePanel(SubtitlePanel *subPanel)
+{
+    _subPanel = subPanel;
+    connect(_ctrlPanel,SIGNAL(toggleSubtitlePanel()),_subPanel,SLOT(togglePanel()));
+}
+
 void ENPlayer::openFile(QString fileName)
 {
     _media = new VlcMedia(fileName, true, _instance);
     _vlcPlayer->open(_media);
     _vlcPlayer->play();
-}
-
-void ENPlayer::setVideoWidget(VlcVideoDelegate *widget)
-{
-    _vlcPlayer->setVideoWidget(widget);
 }
 
 VlcMediaPlayer *ENPlayer::vlcPlayer() const

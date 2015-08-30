@@ -4,7 +4,7 @@
 
 class SubtitleLabel;
 class VlcMediaPlayer;
-//class SubtitleParser;
+class SubtitleParser;
 class SubtitlePanel;
 
 class SubtitleManager : public QObject
@@ -18,7 +18,7 @@ private:
     SubtitleManager();
     SubtitlePanel *_subPanel;
     VlcMediaPlayer *_player;
-    //SubtitleParser *_subParser;
+    SubtitleParser *_subParser;
 public:
     void setMediaPlayer(VlcMediaPlayer *player);
     void clearSubtitles();

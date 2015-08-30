@@ -26,12 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(_idleTimer, SIGNAL(timeout()), this, SLOT(on_Idle()));
     _idleTimer->start();
 
-    _enPlayer = new ENPlayer();
+    _enPlayer = new ENPlayer(ui->videoWidget);
     _subPanel = new SubtitlePanel(this);
-    _enPlayer->setVideoWidget(ui->videoWidget);
-    ui->videoWidget->setMediaPlayer(_enPlayer->vlcPlayer());
-    ui->controlPanel->setMediaPlayer(_enPlayer->vlcPlayer());
-    ui->controlPanel->setSubtitlePanel(_subPanel);
+    _enPlayer->setControlPanel(ui->controlPanel);
+    _enPlayer->setSubtitlePanel(_subPanel);
     connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));
 }
 

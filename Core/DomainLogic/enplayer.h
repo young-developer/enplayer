@@ -2,30 +2,41 @@
 #define ENPLAYER_H
 
 #include <QWidget>
-
+#include <vlc-qt/WidgetVideo.h>
 class VlcInstance;
 class VlcMedia;
 class VlcMediaPlayer;
 class VlcVideo;
 class VlcControlVideo;
 class VlcMetaManager;
-class VlcVideoDelegate;
+class VlcWidgetVideo;
+class ControlPanel;
+class SubtitlePanel;
 
 class ENPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit ENPlayer(QObject *parent = 0);
+    explicit ENPlayer(VlcWidgetVideo *videoWidget,QObject *parent = 0);
     ~ENPlayer();
 private:
-    QStringList ENPlayer::args();
+    SubtitlePanel *_subPanel;
+    ControlPanel *_ctrlPanel;
+    VlcMediaPlayer *_vlcPlayer;
     VlcInstance *_instance;
     VlcVideo *_vlcVideo;
     VlcMedia *_media;
+signals:
+    void stateChanged(Vlc::State);
+public slots:
+    void onStateChanged();
+private:
+    QStringList args();
 public:
+    void setControlPanel(ControlPanel *ctrlPanel);
+    void setSubtitlePanel(SubtitlePanel *subPanel);
     void openFile(QString fileName);
-    VlcMediaPlayer *_vlcPlayer;
-    void setVideoWidget(VlcVideoDelegate *widget);
+
     VlcMediaPlayer *vlcPlayer() const;
 };
 

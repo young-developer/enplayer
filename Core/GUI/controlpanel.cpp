@@ -2,7 +2,6 @@
 #include "vlc-qt/WidgetSeek.h"
 #include "vlc-qt/WidgetVolumeSlider.h"
 #include <vlc-qt/MediaPlayer.h>
-#include "vlc-qt/WidgetVideo.h"
 #include "Subtitles/subtitlepanel.h"
 #include "controlpanel.h"
 
@@ -12,9 +11,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _positionSlider(0),
     _volumeSlider(0),
     _toggleFullscreen(0),
-    _toggleSubtitles(0),
-    _player(0),
-    _subPanel(0)
+    _toggleSubtitles(0)
 {
     _playButton = new QPushButton(this);
     _positionSlider = new VlcWidgetSeek(this);
@@ -35,6 +32,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _toggleFullscreen->setIcon(style()->standardIcon(QStyle::SP_TitleBarMaxButton));
 
     connect(_playButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
+    connect(_toggleSubtitles,SIGNAL(clicked(bool)),SLOT(onToggleSubtitlesBtnClicked()));
     connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreenBtnClicked()));
     this->_volumeSlider->setVolume(50);
 
@@ -46,14 +44,6 @@ void ControlPanel::setMediaPlayer(VlcMediaPlayer *player)
 {
     _positionSlider->setMediaPlayer(player);
     _volumeSlider->setMediaPlayer(player);
-    _player = player;
-    connect(_player,SIGNAL(stateChanged()),SLOT(onStateChanged()));
-}
-
-void ControlPanel::setSubtitlePanel(SubtitlePanel *subPanel)
-{
-    _subPanel = subPanel;
-    connect(_toggleSubtitles,SIGNAL(clicked(bool)),SLOT(onToggleSubtitlesBtnClicked()));
 }
 
 void ControlPanel::hidePanel()
@@ -76,9 +66,9 @@ void ControlPanel::showPanel()
     this->show();
 }
 
-void ControlPanel::onStateChanged()
+void ControlPanel::onStateChanged(Vlc::State state)
 {
-    switch(_player->state())
+    switch(state)
     {
         case Vlc::State::Playing:
             _playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPause));
@@ -91,12 +81,12 @@ void ControlPanel::onStateChanged()
 
 void ControlPanel::onToggleSubtitlesBtnClicked()
 {
-    _subPanel->togglePanel();
+    emit toggleSubtitlePanel();
 }
 
 void ControlPanel::onPlayButtonClicked()
 {
-    _player->togglePause();
+    emit playButtonClicked();
     qInfo()<<"onPlayButtonClicked::togglePause";
 }
 

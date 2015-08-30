@@ -10,7 +10,6 @@ SubtitleManager::SubtitleManager(SubtitlePanel *subPanel, VlcMediaPlayer *player
     connect(_player,SIGNAL(positionChanged(float)),SLOT(updateSubtitles()));
 }
 
-
 void SubtitleManager::setMediaPlayer(VlcMediaPlayer *player)
 {
     _player = player;
@@ -33,7 +32,7 @@ void SubtitleManager::loadSubtitleFile(std::string fileName)
 
 SubtitleManager::~SubtitleManager()
 {
-    //if(_subParser)
-       // delete _subParser;
+    if(_subParser)
+       delete _subParser;
 }
 
