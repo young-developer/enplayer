@@ -2,8 +2,6 @@
 #define SUBTITLEMANAGER_H
 #include <QObject>
 
-class SubtitleLabel;
-class VlcMediaPlayer;
 class SubtitleParser;
 class SubtitlePanel;
 
@@ -17,13 +15,11 @@ public slots:
 private:
     SubtitleManager();
     SubtitlePanel *_subPanel;
-    VlcMediaPlayer *_player;
     SubtitleParser *_subParser;
 public:
-    void setMediaPlayer(VlcMediaPlayer *player);
     void clearSubtitles();
     void loadSubtitleFile(std::string fileName);
-    SubtitleManager(SubtitlePanel *subPanel,VlcMediaPlayer *player);
+    SubtitleManager(SubtitlePanel *subPanel,QObject *parent = 0);
     ~SubtitleManager(void);
 };
 

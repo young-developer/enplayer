@@ -12,6 +12,7 @@ class VlcMetaManager;
 class VlcWidgetVideo;
 class ControlPanel;
 class SubtitlePanel;
+class SubtitleManager;
 
 class ENPlayer : public QObject
 {
@@ -26,6 +27,7 @@ private:
     VlcInstance *_instance;
     VlcVideo *_vlcVideo;
     VlcMedia *_media;
+    SubtitleManager *_subManager;
 signals:
     void stateChanged(Vlc::State);
 public slots:
@@ -35,7 +37,7 @@ private:
 public:
     void setControlPanel(ControlPanel *ctrlPanel);
     void setSubtitlePanel(SubtitlePanel *subPanel);
-    void openFile(QString fileName);
+    void openFile(QString fileName, bool autoPlay = true);
 
     VlcMediaPlayer *vlcPlayer() const;
 };

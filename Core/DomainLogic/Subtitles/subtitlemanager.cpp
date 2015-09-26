@@ -1,33 +1,28 @@
-#include <vlc-qt/MediaPlayer.h>
-#include "Subtitles/subtitlelabel.h"
 #include "Subtitles/subtitlepanel.h"
+#include <SubtitleParser.h>
+#include <SubtitleParserFactory.h>
+
 #include "subtitlemanager.h"
 
-SubtitleManager::SubtitleManager(SubtitlePanel *subPanel, VlcMediaPlayer *player)
+SubtitleManager::SubtitleManager(SubtitlePanel *subPanel, QObject *parent):QObject(parent)
 {
-    _player = player;
     _subPanel = subPanel;
-    connect(_player,SIGNAL(positionChanged(float)),SLOT(updateSubtitles()));
 }
 
-void SubtitleManager::setMediaPlayer(VlcMediaPlayer *player)
+void SubtitleManager::updateSubtitles()
 {
-    _player = player;
+
 }
 
 void SubtitleManager::clearSubtitles()
 {
-    foreach(SubtitleLabel *sub, _subPanel->getSubtitles())
-    {
-        delete sub;
-    }
-    _subPanel->getSubtitles().clear();
+
 }
 
 void SubtitleManager::loadSubtitleFile(std::string fileName)
 {
-    //SubtitleParserFactory subParserFactory(fileName);
-    //_subParser = subParserFactory.getParser();
+    SubtitleParserFactory subParserFactory(fileName);
+    _subParser = subParserFactory.getParser();
 }
 
 SubtitleManager::~SubtitleManager()

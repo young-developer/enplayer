@@ -5,6 +5,7 @@
 #include <vlc-qt/MediaPlayer.h>
 
 #include "Subtitles/subtitlepanel.h"
+#include "Subtitles/subtitlemanager.h"
 #include "controlpanel.h"
 
 #include "enplayer.h"
@@ -16,8 +17,10 @@ ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QObject *parent): QObject(parent
     _vlcPlayer = new VlcMediaPlayer(_instance);
     _vlcVideo = new VlcVideo(_vlcPlayer);
     _vlcPlayer->setVideoWidget(videoWidget);
+    _subManager = new SubtitleManager(_subPanel);
     videoWidget->setMediaPlayer(vlcPlayer());
-    connect (vlcPlayer(), SIGNAL(stateChanged()),SLOT(onStateChanged())) ;
+    connect(vlcPlayer(),SIGNAL(stateChanged()),SLOT(onStateChanged())) ;
+    connect(vlcPlayer(),SIGNAL(positionChanged(float)),_subManager,SLOT(updateSubtitles()));
 }
 
 ENPlayer::~ENPlayer()
@@ -70,11 +73,12 @@ void ENPlayer::setSubtitlePanel(SubtitlePanel *subPanel)
     connect(_ctrlPanel,SIGNAL(toggleSubtitlePanel()),_subPanel,SLOT(togglePanel()));
 }
 
-void ENPlayer::openFile(QString fileName)
+void ENPlayer::openFile(QString fileName,bool autoPlay)
 {
     _media = new VlcMedia(fileName, true, _instance);
     _vlcPlayer->open(_media);
-    _vlcPlayer->play();
+    if(true == autoPlay)
+        _vlcPlayer->play();
 }
 
 VlcMediaPlayer *ENPlayer::vlcPlayer() const

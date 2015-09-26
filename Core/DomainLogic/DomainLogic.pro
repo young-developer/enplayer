@@ -45,9 +45,9 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../GUI/debug/GUI-core.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../GUI/libGUI-core.a
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/release/ -lSubParser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/ -lSubParser
-else:unix: LIBS += -L$$PWD/../../../build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/ -lSubParser
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/release/ -lSubParser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/ -lSubParser
+else:unix: LIBS += -L$$PWD/../../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/ -lSubParser
 
-INCLUDEPATH += $$PWD/
-DEPENDPATH += $$PWD/
+INCLUDEPATH += $$PWD/../../../SubParser
+DEPENDPATH += $$PWD/../../../SubParser
