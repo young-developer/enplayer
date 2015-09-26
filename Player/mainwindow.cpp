@@ -122,3 +122,16 @@ void MainWindow::mouseDoubleClickEvent(QMouseEvent *)
 {
     toggleFullScreen();
 }
+
+void MainWindow::on_actionAdd_Subtitles_triggered()
+{
+    QString fileName =
+                QFileDialog::getOpenFileName(this, tr("Add Subtitles"),
+                                             QDir::homePath(),
+                                             tr("Subtitle files(*)"));
+    if (fileName.isEmpty())
+            return;
+
+    _enPlayer->addSubtitles(fileName);
+    qInfo()<<("Sub file was added : "+fileName);
+}

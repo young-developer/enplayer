@@ -41,6 +41,8 @@ private slots:
     void on_Idle();
 
     void toggleFullScreen();
+    void on_actionAdd_Subtitles_triggered();
+
 private:
     QTimer *_idleTimer;
     Ui::MainWindow *ui;

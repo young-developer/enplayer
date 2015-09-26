@@ -71,9 +71,15 @@ QList<SubtitleLabel *> SubtitlePanel::getSubtitles()
 
 void SubtitlePanel::setSubtitles(QList<SubtitleLabel *> subs)
 {
-    clearSubtitles();
+    if(subs.count())
+    {
+        clearSubtitles();
+    }
     _subtitles = subs;
-    renderSubtitles();
+    if(subs.count())
+    {
+        renderSubtitles();
+    }
 }
 
 void SubtitlePanel::renderSubtitles()
@@ -138,3 +144,7 @@ void SubtitlePanel::paintEvent(QPaintEvent *)
     painter.drawRect(rect());
 }
 
+SubtitlePanel::~SubtitlePanel()
+{
+    clearSubtitles();
+}

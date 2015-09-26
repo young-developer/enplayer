@@ -4,23 +4,26 @@
 
 class SubtitleParser;
 class SubtitlePanel;
-
+class SubtitleLabel;
+class SubtitleItem;
 class SubtitleManager : public QObject
 {
     Q_OBJECT
 signals:
 
 public slots:
-    void updateSubtitles();
+    void updateSubtitles(float position);
 private:
-    SubtitleManager();
     SubtitlePanel *_subPanel;
     SubtitleParser *_subParser;
 public:
     void clearSubtitles();
-    void loadSubtitleFile(std::string fileName);
+    void loadSubtitleFile(QString fileName);
+    void setSubPanel(SubtitlePanel* panel);
+    SubtitleManager(QObject *parent = 0);
     SubtitleManager(SubtitlePanel *subPanel,QObject *parent = 0);
     ~SubtitleManager(void);
+    QList<SubtitleItem *> convertToQList(std::vector<SubtitleItem *> vector);
 };
 
 #endif // SUBTITLEMANAGER_H

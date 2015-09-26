@@ -3,6 +3,8 @@
 
 #include <QLabel>
 
+class SubtitleItem;
+
 class SubtitleLabel : public QLabel
 {
     Q_OBJECT
@@ -10,6 +12,7 @@ class SubtitleLabel : public QLabel
 public:
     explicit SubtitleLabel(QWidget *parent = 0);
     explicit SubtitleLabel(QString text, QWidget *parent = 0);
+    explicit SubtitleLabel(SubtitleItem *item, QWidget *parent = 0);
 signals:
     void clicked();
     void doubleClicked();
@@ -24,6 +27,8 @@ protected:
     void mouseMoveEvent(QMouseEvent *);
     void enterEvent(QEvent *);
     void leaveEvent(QEvent *);
+private:
+    SubtitleItem* _subItem;
 };
 
 #endif // SUBTITLELABEL_H

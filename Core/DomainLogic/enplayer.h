@@ -38,6 +38,7 @@ public:
     void setControlPanel(ControlPanel *ctrlPanel);
     void setSubtitlePanel(SubtitlePanel *subPanel);
     void openFile(QString fileName, bool autoPlay = true);
+    void addSubtitles(QString fileName);
 
     VlcMediaPlayer *vlcPlayer() const;
 };

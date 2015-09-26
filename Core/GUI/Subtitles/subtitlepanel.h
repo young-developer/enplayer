@@ -13,6 +13,7 @@ public:
     void setSubtitles(QList<SubtitleLabel*> subs);
     void panelSizeMove();
     bool isFixed();
+    ~SubtitlePanel();
 signals:
 
 public slots:
