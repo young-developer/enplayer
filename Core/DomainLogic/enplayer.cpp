@@ -19,7 +19,7 @@ ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QObject *parent): QObject(parent
     _vlcPlayer->setVideoWidget(videoWidget);
     videoWidget->setMediaPlayer(vlcPlayer());
     _subManager = new SubtitleManager();
-    connect(vlcPlayer(),SIGNAL(positionChanged(float)),_subManager,SLOT(updateSubtitles(float)));
+    connect(vlcPlayer(),SIGNAL(timeChanged(int)),_subManager,SLOT(updateSubtitles(int)));
     connect(vlcPlayer(),SIGNAL(stateChanged()),SLOT(onStateChanged())) ;
 }
 

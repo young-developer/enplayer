@@ -28,8 +28,8 @@ void SubtitlePanel::Init()
     setMinimumWidth(static_cast<QMainWindow*>(parent())->width()-40);
     setMaximumWidth(400);
 
-    FlowLayout *flayout = new FlowLayout(this);
-    setLayout(flayout);
+    _flayout = new FlowLayout();
+    setLayout(getFlowLayout());
 }
 
 void SubtitlePanel::panelSizeMove()
@@ -64,7 +64,12 @@ void SubtitlePanel::togglePanel()
     isHidden()?show():hide();
 }
 
-QList<SubtitleLabel *> SubtitlePanel::getSubtitles()
+FlowLayout *SubtitlePanel::getFlowLayout() const
+{
+    return _flayout;
+}
+
+QList<SubtitleLabel *> SubtitlePanel::getSubtitles() const
 {
     return _subtitles;
 }

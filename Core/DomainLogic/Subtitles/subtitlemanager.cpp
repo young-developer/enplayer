@@ -2,38 +2,47 @@
 #include "Subtitles/subtitlelabel.h"
 #include <SubtitleParser.h>
 #include <SubtitleParserFactory.h>
-
+#include <QHash>
 #include "subtitlemanager.h"
 
-SubtitleManager::SubtitleManager(SubtitlePanel *subPanel, QObject *parent):QObject(parent)
+void SubtitleManager::updateSubtitles(int position)
 {
-    _subPanel = subPanel;
-}
-
-void SubtitleManager::updateSubtitles(float position)
-{
-    SubtitleLabel *label = new SubtitleLabel(QString::number(position));
-    QList<SubtitleLabel *> _subs;
-    _subs.push_back(label);
-    _subPanel->setSubtitles(_subs);
+    foreach(SubtitleItem *item, _subtitles)
+    {
+        if(item->getStartTime() <= position && item->getEndTime() >= position )
+        {
+            _subPanel->setSubtitles(splitSubtitleToWords(item));
+        }
+    }
 }
 
 void SubtitleManager::clearSubtitles()
 {
+    if(_subParser)
+        delete _subParser;
 
+    foreach (SubtitleItem* item, _subtitles) {
+        if(item)
+            delete item;
+    }
+}
+
+QList<SubtitleLabel*> SubtitleManager::splitSubtitleToWords(SubtitleItem *sub)
+{
+    QList<SubtitleLabel*> subWordList;
+    foreach(QString word, QString(sub->getText().c_str()).split(" ", QString::SkipEmptyParts))
+    {
+        subWordList.append(new SubtitleLabel(word));
+    }
+    return subWordList;
 }
 
 void SubtitleManager::loadSubtitleFile(QString fileName)
 {
+    clearSubtitles();
     SubtitleParserFactory subParserFactory(fileName.toStdString());
-    if(_subParser)
-        delete _subParser;
     _subParser = subParserFactory.getParser();
-    QList<SubtitleItem *> _subItemList = convertToQList(_subParser->getSubtitles());
-    SubtitleLabel *label = new SubtitleLabel(QString(_subItemList[0]->getText().c_str()));
-    QList<SubtitleLabel *> _subs;
-    _subs.push_back(label);
-    _subPanel->setSubtitles(_subs);
+    _subtitles = convertToQList(_subParser->getSubtitles());
 }
 
 void SubtitleManager::setSubPanel(SubtitlePanel *panel)
