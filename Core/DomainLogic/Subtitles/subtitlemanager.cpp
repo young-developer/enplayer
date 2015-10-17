@@ -3,6 +3,7 @@
 #include <SubtitleParser.h>
 #include <SubtitleParserFactory.h>
 #include <QHash>
+#include <QDebug>
 #include "subtitlemanager.h"
 
 void SubtitleManager::updateSubtitles(int position)
@@ -30,9 +31,10 @@ void SubtitleManager::clearSubtitles()
 QList<SubtitleLabel*> SubtitleManager::splitSubtitleToWords(SubtitleItem *sub)
 {
     QList<SubtitleLabel*> subWordList;
-    foreach(QString word, QString(sub->getText().c_str()).split(" ", QString::SkipEmptyParts))
+    foreach(QString word, QString(sub->getText().c_str()).replace("\n"," ").split(" ", QString::SkipEmptyParts))
     {
         subWordList.append(new SubtitleLabel(word));
+        qInfo()<<word;
     }
     return subWordList;
 }

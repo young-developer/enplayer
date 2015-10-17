@@ -5,6 +5,12 @@
 #include <QTextStream>
 #include <QDateTime>
 
+inline QTextStream& qStdout()
+{
+    static QTextStream r{stdout};
+    return r;
+}
+
 void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, const QString &msg)
 {
     QString txt;
@@ -25,7 +31,7 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
         txt = QString("Fatal: %1 (%2 %3 %4)").arg(msg).arg(context.file).arg(context.line).arg(context.function);
     break;
     }
-
+    qStdout()<<txt<<endl;
     QFile outFile("log.txt");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream ts(&outFile);

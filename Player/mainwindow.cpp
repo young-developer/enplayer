@@ -54,7 +54,6 @@ void MainWindow::on_actionOpen_triggered()
     qInfo()<<("Open file: "+fileName);
 }
 
-
 void MainWindow::on_actionExit_triggered()
 {
     QApplication::quit();
@@ -78,6 +77,8 @@ bool MainWindow::event(QEvent *event)
     case QEvent::WindowStateChange:
     case QEvent::Resize:
     case QEvent::Move:
+    case QEvent::MouseButtonRelease:
+    case QEvent::MouseButtonDblClick:
         _subPanel->panelSizeMove();
         break;
     default:

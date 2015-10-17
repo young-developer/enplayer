@@ -26,12 +26,14 @@ private:
     bool _fixed;
     QPoint currentDragPosition;
     QSize dragSize;
-    FlowLayout *_flayout;
+    QLayout *_flayout;
     QList<SubtitleLabel*> _subtitles;
+    QImage *image;
 private:
     void Init();
     void renderSubtitles();
     void clearSubtitles();
+    void drawPanel();
 protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);

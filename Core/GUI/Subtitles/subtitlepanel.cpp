@@ -22,36 +22,30 @@ void SubtitlePanel::Init()
     setWindowFlags(Qt::FramelessWindowHint|Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_QuitOnClose, false);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     setMouseTracking(true);
-    setMaximumHeight(80);
+
     setMinimumHeight(static_cast<QMainWindow*>(parent())->height()-250);
     setMinimumWidth(static_cast<QMainWindow*>(parent())->width()-40);
+    setMaximumHeight(80);
     setMaximumWidth(400);
-
-    _flayout = new FlowLayout();
-    setLayout(getFlowLayout());
+    QLayout *flayout = new QHBoxLayout();
+    flayout->setAlignment(flayout,Qt::AlignCenter);
+    setLayout(flayout);
 }
 
 void SubtitlePanel::panelSizeMove()
 {
-    if (this->width() <= parentWidget()->width() && this->height() <= parentWidget()->height())
-    {
-        this->setWindowOpacity(1); // Show the widget
+    this->setWindowOpacity(1); // Show the widget
 
-        resize(parentWidget()->size());
-        setMaximumWidth(parentWidget()->width()/1.10);
+    resize(parentWidget()->size());
+    setMaximumWidth(parentWidget()->width()*0.9);//90% of the player size
 
-        QPoint p = parentWidget()->mapFromParent(parentWidget()->pos());
-        int x = p.x() + (parentWidget()->width() - this->width()) / 2;
-        int y = p.y() + (parentWidget()->height() - this->height()) / 1.15;
-
-        this->move(x, y);
-        this->raise();
-    }
-    else
-    {
-        this->setWindowOpacity(0); // Hide the widget
-    }
+    QPoint parentPos = parentWidget()->mapFromParent(parentWidget()->pos());
+    int x = parentWidget()->pos().rx() + (parentWidget()->width() - this->width()) / 2;
+    int y = parentWidget()->pos().ry() + (parentWidget()->height() - this->height()) / 1.15;//margin 15%
+    this->move(x,y);
+    this->raise();
 }
 
 bool SubtitlePanel::isFixed()
@@ -62,11 +56,6 @@ bool SubtitlePanel::isFixed()
 void SubtitlePanel::togglePanel()
 {
     isHidden()?show():hide();
-}
-
-FlowLayout *SubtitlePanel::getFlowLayout() const
-{
-    return _flayout;
 }
 
 QList<SubtitleLabel *> SubtitlePanel::getSubtitles() const
@@ -141,6 +130,11 @@ void SubtitlePanel::mousePressEvent(QMouseEvent *event)
 }
 
 void SubtitlePanel::paintEvent(QPaintEvent *)
+{
+    drawPanel();
+}
+
+void SubtitlePanel::drawPanel()
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
