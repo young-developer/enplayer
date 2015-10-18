@@ -16,7 +16,11 @@ public:
     void panelSizeMove();
     bool isFixed();
     ~SubtitlePanel();
-    FlowLayout *getFlowLayout() const;
+    QFont getFont() const;
+    void setFont(QFont font);
+
+    unsigned short getOpacity() const;
+    void setOpacity(unsigned short opacity);
 
 signals:
 
@@ -24,11 +28,11 @@ public slots:
     void togglePanel();
 private:
     bool _fixed;
-    QPoint currentDragPosition;
-    QSize dragSize;
-    QLayout *_flayout;
+    QFont _subFont;
+    unsigned short _opacity;
+    QPoint _currentDragPosition;
+    QSize _dragSize;
     QList<SubtitleLabel*> _subtitles;
-    QImage *image;
 private:
     void Init();
     void renderSubtitles();

@@ -3,8 +3,9 @@
 # Project created by QtCreator 2015-08-01T16:33:02
 # Project Semantic Versioning http://semver.org/
 #-------------------------------------------------
-VERSION = 0.4.4
-DEFINES += VERSION_NUMBER=\\\"0.4.4\\\"
+VERSION = 0.5.0
+
+DEFINES += VERSION_NUMBER=\\\"0.5.0\\\"
 
 QT       += core gui widgets
 
@@ -74,6 +75,8 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Comm
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
+
+#Subtitle Parser library
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/release/ -lSubParser
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/ -lSubParser

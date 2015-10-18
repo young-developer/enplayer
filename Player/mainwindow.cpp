@@ -36,8 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     qInfo()<<("Application was closed");
-    delete _enPlayer;
     delete _subPanel;
+    delete _enPlayer;
     delete ui;
 }
 

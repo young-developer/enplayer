@@ -72,7 +72,6 @@ void ENPlayer::setSubtitlePanel(SubtitlePanel *subPanel)
     _subPanel = subPanel;
     _subManager->setSubPanel(_subPanel);
     connect(_ctrlPanel,SIGNAL(toggleSubtitlePanel()),_subPanel,SLOT(togglePanel()));
-
 }
 
 void ENPlayer::openFile(QString fileName,bool autoPlay)
@@ -86,6 +85,7 @@ void ENPlayer::openFile(QString fileName,bool autoPlay)
 void ENPlayer::addSubtitles(QString fileName)
 {
     _subManager->loadSubtitleFile(fileName);
+    _subPanel->show();
 }
 
 VlcMediaPlayer *ENPlayer::vlcPlayer() const

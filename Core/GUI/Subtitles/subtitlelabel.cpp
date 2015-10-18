@@ -16,7 +16,7 @@ SubtitleLabel::SubtitleLabel(QString text, QWidget *parent):QLabel(parent)
 void SubtitleLabel::Init()
 {
     setMouseTracking(true);
-    QFont serifFont("Times", 16, QFont::Bold);
+    QFont serifFont("Arial", 14, QFont::Normal);
     setFont(serifFont);
 }
 
