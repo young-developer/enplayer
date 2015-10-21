@@ -16,6 +16,7 @@ SubtitleLabel::SubtitleLabel(QString text, QWidget *parent):QLabel(parent)
 void SubtitleLabel::Init()
 {
     setMouseTracking(true);
+    setToolTip("TEST TOOLTIP");
     QFont serifFont("Arial", 14, QFont::Normal);
     setFont(serifFont);
 }
