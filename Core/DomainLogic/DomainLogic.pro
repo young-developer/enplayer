@@ -51,3 +51,29 @@ else:unix: LIBS += -L$$PWD/../../../SubParser/build-SubParser-Desktop_Qt_5_5_0_M
 
 INCLUDEPATH += $$PWD/../../../SubParser
 DEPENDPATH += $$PWD/../../../SubParser
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../Common/Services/release/ -lServices
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../Common/Services/debug/ -lServices
+else:unix: LIBS += -L$$OUT_PWD/../../Common/Services/ -lServices
+
+INCLUDEPATH += $$PWD/../../Common/Services
+DEPENDPATH += $$PWD/../../Common/Services
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Services/release/libServices.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Services/debug/libServices.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Services/release/Services.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Services/debug/Services.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../../Common/Services/libServices.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../Common/Exceptions/release/ -lExceptions
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../Common/Exceptions/debug/ -lExceptions
+else:unix: LIBS += -L$$OUT_PWD/../../Common/Exceptions/ -lExceptions
+
+INCLUDEPATH += $$PWD/../../Common/Exceptions
+DEPENDPATH += $$PWD/../../Common/Exceptions
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Exceptions/release/libExceptions.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Exceptions/debug/libExceptions.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Exceptions/release/Exceptions.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../Common/Exceptions/debug/Exceptions.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../../Common/Exceptions/libExceptions.a

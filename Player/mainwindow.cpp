@@ -4,11 +4,14 @@
 #include <QFileDialog>
 #include <QTimer>
 
+#include "exmessagebox.h"
+#include "qtexception.h"
 #include "enplayer.h"
 #include "controlpanel.h"
 #include "Subtitles/subtitlepanel.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,7 +28,6 @@ MainWindow::MainWindow(QWidget *parent) :
     _idleTimer->setInterval(3000);//idle interval 3sec
     connect(_idleTimer, SIGNAL(timeout()), this, SLOT(on_Idle()));
     _idleTimer->start();
-
     _enPlayer = new ENPlayer(ui->videoWidget);
     _subPanel = new SubtitlePanel(this);
     _enPlayer->setControlPanel(ui->controlPanel);
@@ -35,7 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+#ifdef QT_DEBUG
     qInfo()<<("Application was closed");
+#endif
     delete _subPanel;
     delete _enPlayer;
     delete ui;
@@ -49,9 +53,21 @@ void MainWindow::on_actionOpen_triggered()
                                              tr("Multimedia files(*)"));
     if (fileName.isEmpty())
             return;
-
-    _enPlayer->openFile(fileName);
+    try
+    {
+        _enPlayer->openFile(fileName);
+    }
+    catch(QtException ex)
+    {
+        ExMessageBox(ex,"Open video file exception").exec();
+    }
+    catch( ... )
+    {
+        ExMessageBox(QtException(ExceptionType::Undefined,"Undefined open video file exception"),"exception").exec();
+    }
+#ifdef QT_DEBUG
     qInfo()<<("Open file: "+fileName);
+#endif
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -96,7 +112,10 @@ void MainWindow::on_Idle()
         ui->controlPanel->hidePanel();
         ui->menuBar->hide();
         setCursor(Qt::BlankCursor);
+        _enPlayer->refreshFrame();
+#ifdef QT_DEBUG
         qInfo()<<"Idle mode";
+#endif
     }
 }
 
@@ -134,5 +153,12 @@ void MainWindow::on_actionAdd_Subtitles_triggered()
             return;
 
     _enPlayer->addSubtitles(fileName);
+#ifdef QT_DEBUG
     qInfo()<<("Sub file was added : "+fileName);
+#endif
+}
+
+void MainWindow::on_actionShow_log_triggered()
+{
+    ExMessageBox(QtException(ExceptionType::Information,"Application log file"),"log file",this).exec();
 }

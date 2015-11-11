@@ -6,7 +6,7 @@
 
 TranslateManager::TranslateManager()
 {
-    setDefaultTranslateService(new YandexTranslate());
+    setDefaultTranslateService(new GoogleTranslate());
 }
 
 TranslateManager::TranslateManager(ITranslateService* defaultTranslateService)
@@ -24,16 +24,17 @@ void TranslateManager::setDefaultTranslateService(ITranslateService *defaultTran
     _defaultTranslateService = defaultTranslateService;
 }
 
-void TranslateManager::AltTranslate(QString text, QString &result/*out param*/)
+bool TranslateManager::AltTranslate(QString text, QString &result/*out param*/)
 {
     foreach(ITranslateService *translator, translateServices())
     {
         if(translator->isAvailible())
         {
             if(translator->Translate(text, result))
-                return;
+                return true;
         }
     }
+    return false;
 }
 
 void TranslateManager::AddTranslateService(ITranslateService *translateService)
@@ -46,17 +47,17 @@ QList<ITranslateService *> TranslateManager::translateServices() const
     return _translateServices;
 }
 
-void TranslateManager::Translate(QString text, QString &result)
+bool TranslateManager::Translate(QString text, QString &result)
 {
-    result = "Error.Try again later.";
+    result = "Error.Check your internet conection.";
     if(!defaultTranslateService()->isAvailible())
     {
         qInfo("%s",defaultTranslateService()->name().append(" translate service is not availiable."));
-        AltTranslate(text,result);
+        return AltTranslate(text,result);
     }
     else
     {
-        defaultTranslateService()->Translate(text, result);
+        return defaultTranslateService()->Translate(text, result);
     }
 }
 

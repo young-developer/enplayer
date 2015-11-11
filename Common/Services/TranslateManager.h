@@ -2,6 +2,7 @@
 #define TRANSLATESERVICE_H
 
 #include <QObject>
+class ITranslateService;
 
 class TranslateManager
 {
@@ -9,9 +10,9 @@ private:
     ITranslateService *_defaultTranslateService;
     QList<ITranslateService *> _translateServices;
     void AddTranslateService(ITranslateService *translateService);
-    void AltTranslate(QString text, QString &result);
+    bool AltTranslate(QString text, QString &result);
 public:
-    void Translate(QString text, QString &result/*out param*/);
+    bool Translate(QString text, QString &result/*out param*/);
     TranslateManager();
     TranslateManager(ITranslateService *defaultTranslateService);
     ~TranslateManager();

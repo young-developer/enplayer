@@ -34,7 +34,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     connect(_playButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
     connect(_toggleSubtitles,SIGNAL(clicked(bool)),SLOT(onToggleSubtitlesBtnClicked()));
     connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreenBtnClicked()));
-    this->_volumeSlider->setVolume(50);
+    this->_volumeSlider->setVolume(0);//off volume
 
     this->setMinimumHeight(30);
     this->setMaximumHeight(40);

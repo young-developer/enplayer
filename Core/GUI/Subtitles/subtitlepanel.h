@@ -18,12 +18,13 @@ public:
     ~SubtitlePanel();
     QFont getFont() const;
     void setFont(QFont font);
-
     unsigned short getOpacity() const;
     void setOpacity(unsigned short opacity);
-
+    void enterEvent(QEvent *);
+    void leaveEvent(QEvent *);
 signals:
-
+    void mouseEntered();
+    void mouseLeaved();
 public slots:
     void togglePanel();
 private:
@@ -37,11 +38,10 @@ private:
     void Init();
     void renderSubtitles();
     void clearSubtitles();
-    void drawPanel();
 protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *event);
 };
 
 #endif // SUBTITLEPANEL_H

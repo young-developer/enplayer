@@ -74,8 +74,22 @@ void SubtitlePanel::setOpacity(unsigned short int opacity)
     {
         float percent = opacity/100.0;
         _opacity = static_cast<unsigned short>(255*percent);
-        drawPanel();
+        this->update();
     }
+    else
+    {
+        qWarning()<<"Incorect opacity value for subtitle panel has been set!";
+    }
+}
+
+void SubtitlePanel::enterEvent(QEvent *)
+{
+    emit mouseEntered();
+}
+
+void SubtitlePanel::leaveEvent(QEvent *)
+{
+    emit mouseLeaved();
 }
 
 QFont SubtitlePanel::getFont() const
@@ -123,7 +137,7 @@ void SubtitlePanel::clearSubtitles()
     foreach(SubtitleLabel *sub, _subtitles)
     {
         if(sub)
-            delete sub;
+            sub->deleteLater();
     }
     _subtitles.clear();
 }
@@ -163,18 +177,13 @@ void SubtitlePanel::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void SubtitlePanel::paintEvent(QPaintEvent *)
-{
-    drawPanel();
-}
-
-void SubtitlePanel::drawPanel()
+void SubtitlePanel::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255,255,255, getOpacity()));
-    painter.drawRect(rect());
+    painter.drawRect(event->rect());
 }
 
 SubtitlePanel::~SubtitlePanel()

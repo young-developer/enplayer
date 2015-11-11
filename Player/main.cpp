@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include "exapp.h"
 #include <QtDebug>
 #include <QFile>
 #include <QTextStream>
@@ -45,11 +46,18 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
 int main(int argc, char *argv[])
 {
     qInstallMessageHandler(fileMessageHandler);
-    QApplication a(argc, argv);
+    ExApplication a(argc, argv);
     a.setApplicationName("enplayer");
     a.setApplicationVersion(VERSION_NUMBER);
     MainWindow w;
     w.show();
 
-    return a.exec();
+    try
+    {
+        return a.exec();
+    }
+    catch( std::exception& e )
+    {
+        qDebug()<<"Exception::"<<e.what();
+    }
 }

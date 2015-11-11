@@ -18,7 +18,8 @@ class ENPlayer : public QObject
 {
     Q_OBJECT
 public:
-    explicit ENPlayer(VlcWidgetVideo *videoWidget,QObject *parent = 0);
+    explicit ENPlayer(VlcWidgetVideo *videoWidget, QObject *parent = 0);
+    explicit ENPlayer(VlcWidgetVideo *videoWidget, QString filePath, QString subPath);
     ~ENPlayer();
 private:
     SubtitlePanel *_subPanel;
@@ -34,7 +35,9 @@ public slots:
     void onStateChanged();
 private:
     QStringList args();
+    void Init(VlcWidgetVideo *videoWidget);
 public:
+    void refreshFrame();
     void setControlPanel(ControlPanel *ctrlPanel);
     void setSubtitlePanel(SubtitlePanel *subPanel);
     void openFile(QString fileName, bool autoPlay = true);

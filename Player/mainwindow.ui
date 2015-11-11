@@ -99,6 +99,8 @@
     </property>
     <addaction name="actionRead_Me"/>
     <addaction name="separator"/>
+    <addaction name="actionShow_log"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu_File"/>
@@ -134,6 +136,11 @@
   <action name="actionRead_Me">
    <property name="text">
     <string>&amp;Read Me</string>
+   </property>
+  </action>
+  <action name="actionShow_log">
+   <property name="text">
+    <string>Show log</string>
    </property>
   </action>
  </widget>

@@ -4,6 +4,7 @@
 #include <SubtitleParserFactory.h>
 #include <QHash>
 #include <QDebug>
+#include "qtexception.h"
 #include "subtitlemanager.h"
 
 void SubtitleManager::updateSubtitles(int position)
@@ -14,6 +15,20 @@ void SubtitleManager::updateSubtitles(int position)
         {
             _subPanel->setSubtitles(splitSubtitleToWords(item));
         }
+    }
+}
+
+void SubtitleManager::Translate()
+{
+    if(sender()!=nullptr)
+    {
+        SubtitleLabel* label = static_cast<SubtitleLabel*>(sender());
+        QString result = "Error.Try again later.";
+        bool isTranslated = false;
+        if(_translateMgr)
+            isTranslated = _translateMgr->Translate(label->text(),result/*out*/);
+        if(isTranslated)
+            label->setToolTip(result);
     }
 }
 
@@ -34,17 +49,30 @@ QList<SubtitleLabel*> SubtitleManager::splitSubtitleToWords(SubtitleItem *sub)
     foreach(QString word, QString(sub->getText().c_str()).replace("\n"," ").split(" ", QString::SkipEmptyParts))
     {
         subWordList.append(new SubtitleLabel(word));
-        qInfo()<<word;
+        //qInfo()<<word;
     }
+    //connect TranslateManager
+    foreach(SubtitleLabel *subLabel,subWordList)
+    {
+        connect(subLabel,SIGNAL(mouseEntered()),SLOT(Translate()));
+    }
+
     return subWordList;
 }
 
 void SubtitleManager::loadSubtitleFile(QString fileName)
 {
     clearSubtitles();
-    SubtitleParserFactory subParserFactory(fileName.toStdString());
-    _subParser = subParserFactory.getParser();
-    _subtitles = convertToQList(_subParser->getSubtitles());
+    try
+    {
+        SubtitleParserFactory subParserFactory(fileName.toStdString());
+        _subParser = subParserFactory.getParser();
+        _subtitles = convertToQList(_subParser->getSubtitles());
+    }
+    catch(std::exception ex)
+    {
+        throw QtException(ExceptionType::Error,ex.what());
+    }
 }
 
 void SubtitleManager::setSubPanel(SubtitlePanel *panel)
@@ -65,11 +93,14 @@ SubtitleManager::SubtitleManager(QObject *parent):QObject(parent)
 {
     _subParser = nullptr;
     _subPanel = nullptr;
+    _translateMgr = new TranslateManager();
 }
 
 SubtitleManager::~SubtitleManager()
 {
     if(_subParser)
        delete _subParser;
+    if(_translateMgr)
+        delete _translateMgr;
 }
 

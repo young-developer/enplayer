@@ -13,6 +13,18 @@
 ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QObject *parent): QObject(parent),
     _media(0)
 {
+    Init(videoWidget);
+}
+
+ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QString filePath,QString subPath): _media(0)
+{
+    Init(videoWidget);
+    openFile(filePath,true);
+    addSubtitles(subPath);
+}
+
+void ENPlayer::Init(VlcWidgetVideo *videoWidget)
+{
     _instance = new VlcInstance(ENPlayer::args(),this);
     _vlcPlayer = new VlcMediaPlayer(_instance);
     _vlcVideo = new VlcVideo(_vlcPlayer);
@@ -51,12 +63,17 @@ QStringList ENPlayer::args()
          << "--no-sub-autodetect-file"
          << "--no-loop"
          << "--no-video-title-show"
-#if defined(Q_OS_DARWIN)
+#if defined(Q_OS_MAC)
          << "--vout=macosx"
 #endif
          << "--drop-late-frames";
 
     return args;
+}
+
+void ENPlayer::refreshFrame()
+{
+     _vlcPlayer->videoWidget()->request();
 }
 
 void ENPlayer::setControlPanel(ControlPanel *ctrlPanel)
@@ -72,6 +89,8 @@ void ENPlayer::setSubtitlePanel(SubtitlePanel *subPanel)
     _subPanel = subPanel;
     _subManager->setSubPanel(_subPanel);
     connect(_ctrlPanel,SIGNAL(toggleSubtitlePanel()),_subPanel,SLOT(togglePanel()));
+    connect(_subPanel,SIGNAL(mouseEntered()),vlcPlayer(),SLOT(pause()));
+    connect(_subPanel,SIGNAL(mouseLeaved()),vlcPlayer(),SLOT(play()));
 }
 
 void ENPlayer::openFile(QString fileName,bool autoPlay)

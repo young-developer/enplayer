@@ -2,4 +2,6 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     GUI \
-    Services
+    Services \
+    Exceptions \
+    Network
