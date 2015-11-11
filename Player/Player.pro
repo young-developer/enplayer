@@ -3,9 +3,9 @@
 # Project created by QtCreator 2015-08-01T16:33:02
 # Project Semantic Versioning http://semver.org/
 #-------------------------------------------------
-VERSION = 0.5.0
+VERSION = 0.6.0
 
-DEFINES += VERSION_NUMBER=\\\"0.5.0\\\"
+DEFINES += VERSION_NUMBER=\\\"0.6.0\\\"
 
 QT       += core gui widgets network
 
