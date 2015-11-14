@@ -1,10 +1,24 @@
 #include <QtNetwork>
 #include <QNetworkInterface>
 #include "NetworkManager.h"
+#include "Request.h"
+#include "RequestSender.h"
+
+
 namespace Network
 {
     NetworkManager::NetworkManager()
     {
+    }
+
+    QByteArray NetworkManager::GET(QString url)
+    {
+        return RequestSender(15000).get(Request(url));//get request 15sec
+    }
+
+    QByteArray NetworkManager::POST(QString url)
+    {
+        return RequestSender(15000).post(Request(url));//get request 15sec
     }
 
     bool NetworkManager::isOnline()

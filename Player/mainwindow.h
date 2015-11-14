@@ -5,6 +5,7 @@
 
 namespace Ui {
 class MainWindow;
+class AboutDialog;
 }
 
 class VlcInstance;
@@ -45,9 +46,13 @@ private slots:
 
     void on_actionShow_log_triggered();
 
+    void on_actionAbout_triggered();
+
 private:
     QTimer *_idleTimer;
     Ui::MainWindow *ui;
+    Ui::AboutDialog *aboutDialogUI;
+    QDialog *aboutDialog;
     ENPlayer *_enPlayer;
     SubtitlePanel *_subPanel;
     bool event(QEvent *event);

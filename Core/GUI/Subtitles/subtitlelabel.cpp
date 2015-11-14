@@ -16,35 +16,41 @@ SubtitleLabel::SubtitleLabel(QString text, QWidget *parent):QLabel(parent)
 void SubtitleLabel::Init()
 {
     setMouseTracking(true);
-    setToolTip("TEST TOOLTIP");
     QFont serifFont("Arial", 14, QFont::Normal);
     setFont(serifFont);
 }
 
-void SubtitleLabel::mouseDoubleClickEvent(QMouseEvent *)
+void SubtitleLabel::mouseDoubleClickEvent(QMouseEvent *event)
 {
+    Q_UNUSED(event);
     emit doubleClicked();
 }
 
-void SubtitleLabel::mousePressEvent(QMouseEvent *)
+void SubtitleLabel::mousePressEvent(QMouseEvent *event)
 {
+    Q_UNUSED(event);
     emit clicked();
 }
 
-void SubtitleLabel::mouseMoveEvent(QMouseEvent *)
+void SubtitleLabel::mouseMoveEvent(QMouseEvent *event)
 {
-    //Q_UNUSED(event);
+    Q_UNUSED(event);
     emit hovered();
 }
 
-void SubtitleLabel::enterEvent(QEvent *)
+void SubtitleLabel::enterEvent(QEvent *event)
 {
+    Q_UNUSED(event);
     setStyleSheet("color:red;");
+
+    qInfo()<<"SubtitleLabel:'"<<this->text()<<"' enter event was fired!";
+
     emit mouseEntered();
 }
 
-void SubtitleLabel::leaveEvent(QEvent *)
+void SubtitleLabel::leaveEvent(QEvent *event)
 {
+    Q_UNUSED(event);
     setStyleSheet("color:white;");
     emit mouseLeaved();
 }

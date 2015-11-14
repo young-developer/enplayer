@@ -2,7 +2,7 @@
 
 #include "Request.h"
 #include "RequestSender.h"
-
+#include "qtexception.h"
 
 namespace Network
 {
@@ -72,9 +72,9 @@ namespace Network
 
 #ifdef QT_DEBUG
         if (getRequest)
-            qDebug() << "[GET] " <<  request.request().url().toString();
+            qInfo() << "[GET] " <<  request.request().url().toString();
         else
-            qDebug() << "[POST]" << request.request(false).url().toString() << request.data();
+            qInfo() << "[POST]" << request.request(false).url().toString() << request.data();
 #endif
 
         QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
@@ -93,12 +93,13 @@ namespace Network
         else
         {
             _error = RequestSender::TimeoutError;
+            throw QtException(ExceptionType::Error,"RequestSender error: "+reply->errorString());
         }
 
         reply->deleteLater();
 
 #ifdef QT_DEBUG
-        qDebug() << "[ANSWER]" << data;
+        qInfo() << "[ANSWER]" << data;
 #endif
 
         return data;

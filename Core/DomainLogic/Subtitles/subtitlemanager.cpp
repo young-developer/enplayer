@@ -5,6 +5,7 @@
 #include <QHash>
 #include <QDebug>
 #include "qtexception.h"
+#include "exmessagebox.h"
 #include "subtitlemanager.h"
 
 void SubtitleManager::updateSubtitles(int position)
@@ -27,6 +28,7 @@ void SubtitleManager::Translate()
         bool isTranslated = false;
         if(_translateMgr)
             isTranslated = _translateMgr->Translate(label->text(),result/*out*/);
+
         if(isTranslated)
             label->setToolTip(result);
     }
@@ -54,7 +56,7 @@ QList<SubtitleLabel*> SubtitleManager::splitSubtitleToWords(SubtitleItem *sub)
     //connect TranslateManager
     foreach(SubtitleLabel *subLabel,subWordList)
     {
-        connect(subLabel,SIGNAL(mouseEntered()),SLOT(Translate()));
+        connect(subLabel,SIGNAL(doubleClicked()),SLOT(Translate()));
     }
 
     return subWordList;

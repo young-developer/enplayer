@@ -22,11 +22,11 @@ signals:
 public slots:
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent *);
-    void mousePressEvent(QMouseEvent *);
-    void mouseMoveEvent(QMouseEvent *);
-    void enterEvent(QEvent *);
-    void leaveEvent(QEvent *);
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void enterEvent(QEvent *event);
+    void leaveEvent(QEvent *event);
 private:
     SubtitleItem* _subItem;
 };

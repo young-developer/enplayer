@@ -137,7 +137,7 @@ void SubtitlePanel::clearSubtitles()
     foreach(SubtitleLabel *sub, _subtitles)
     {
         if(sub)
-            sub->deleteLater();
+            delete sub;
     }
     _subtitles.clear();
 }

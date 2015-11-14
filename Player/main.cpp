@@ -5,6 +5,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
+#include "qtexception.h"
+#include "exmessagebox.h"
 
 inline QTextStream& qStdout()
 {
@@ -47,7 +49,7 @@ int main(int argc, char *argv[])
 {
     qInstallMessageHandler(fileMessageHandler);
     ExApplication a(argc, argv);
-    a.setApplicationName("enplayer");
+    a.setApplicationName(APP_NAME);
     a.setApplicationVersion(VERSION_NUMBER);
     MainWindow w;
     w.show();
@@ -56,8 +58,12 @@ int main(int argc, char *argv[])
     {
         return a.exec();
     }
-    catch( std::exception& e )
+    catch( QtException& ex )
     {
-        qDebug()<<"Exception::"<<e.what();
+        ExMessageBox(ex,"Main exception").exec();
+    }
+    catch( std::exception& ex )
+    {
+        ExMessageBox(QtException(ExceptionType::Error,ex.what()),"Main exception").exec();
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>127</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>About</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QGraphicsView" name="LogoImage">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>71</width>
+     <height>71</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="AppName">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>7</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>EnPlayer</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="DescText">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>30</y>
+     <width>301</width>
+     <height>71</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Version">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>106</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>v.0.0</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

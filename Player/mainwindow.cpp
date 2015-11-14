@@ -9,6 +9,7 @@
 #include "enplayer.h"
 #include "controlpanel.h"
 #include "Subtitles/subtitlepanel.h"
+#include "ui_aboutdialog.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -18,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    aboutDialog = nullptr;
+    aboutDialogUI = nullptr;
     setWindowTitle("EN Player v."+QString(VERSION_NUMBER));
 
     centralWidget()->setMouseTracking(true);
@@ -42,6 +45,8 @@ MainWindow::~MainWindow()
 #endif
     delete _subPanel;
     delete _enPlayer;
+    delete aboutDialogUI;
+    delete aboutDialog;
     delete ui;
 }
 
@@ -161,4 +166,18 @@ void MainWindow::on_actionAdd_Subtitles_triggered()
 void MainWindow::on_actionShow_log_triggered()
 {
     ExMessageBox(QtException(ExceptionType::Information,"Application log file"),"log file",this).exec();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    if(aboutDialog == nullptr)
+    {
+       aboutDialog = new QDialog(this);
+       aboutDialogUI = new Ui::AboutDialog;
+       aboutDialogUI->AppName->setText(APP_NAME);
+       aboutDialogUI->Version->setText(VERSION_NUMBER);
+       aboutDialogUI->DescText->setText("EN Player - simple video player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence.");
+       aboutDialogUI->setupUi(aboutDialog);
+    }
+    aboutDialog->exec();
 }

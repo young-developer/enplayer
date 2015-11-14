@@ -6,6 +6,7 @@
 VERSION = 0.6.0
 
 DEFINES += VERSION_NUMBER=\\\"0.6.0\\\"
+DEFINES += APP_NAME=\\\"EnPlayer\\\"
 
 QT       += core gui widgets network
 
@@ -18,7 +19,8 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    aboutdialog.ui
 
 # Edit below for custom library location
 

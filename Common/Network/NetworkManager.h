@@ -9,6 +9,8 @@ namespace Network
 
     public:
         NetworkManager();
+        QByteArray GET(QString url);
+        QByteArray POST(QString url);
         bool isOnline();
     };
 }
