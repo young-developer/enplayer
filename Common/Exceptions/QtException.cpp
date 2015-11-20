@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QtWidgets/QMessageBox>
 #include "qtexception.h"
+#include "nullpointerexception.h"
 
 
 ExceptionType QtException::Type() const
@@ -14,14 +15,24 @@ void QtException::setType(const ExceptionType &exType)
     _exType = exType;
 }
 
+void QtException::setMessage(QString msg)
+{
+    exception(msg.toStdString().c_str());
+}
+
+QtException::QtException():exception()
+{
+    QtException(ExceptionType::Undefined,QString("Undefined exception::").append(what()));
+}
+
 QtException::QtException(ExceptionType exType,QString msg):exception(msg.toStdString().c_str())
 {
     setType(exType);
-
+    setMessage(msg);
     if(exType != ExceptionType::Information)
         qCritical()<<getTypeAsString()<<" "<<what();
     else
-        qInfo()<<getTypeAsString()<<"::"<<msg;
+        qInfo()<<getTypeAsString()<<"::"<<what();
 }
 
 QString QtException::getTypeAsString() const

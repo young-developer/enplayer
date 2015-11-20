@@ -3,6 +3,7 @@
 #include "ITranslateService.h"
 #include "NetworkManager.h"
 #include "GoogleTranslate.h"
+#include "request.h"
 #include <QUrl>
 #include <QDebug>
 #include <QJsonDocument>
@@ -31,15 +32,31 @@ GoogleTranslate::~GoogleTranslate()
 
 bool GoogleTranslate::Translate(QString text, QString &result)
 {
-    setServiceParams("client=qlt&sl=auto&tl=ru&text=%27"+text+"%27");
+    Network::Request reqUrl;
+    reqUrl.setAddress(getServiceUrl());
+    reqUrl.addParam("client","qlt");
+    reqUrl.addParam("sl","auto");
+    reqUrl.addParam("tl","ru");
+    reqUrl.addParam("text",text);
+
     try
     {
         result="";
         QByteArray resData;
         if(isLocked())
         {
+            /*QWebView *qWebView = new QWebView();
+
+            QWebPage *page = qWebView->page();
+            QNetworkAccessManager *networkManager = new QNetworkAccessManager();
+            page->setNetworkAccessManager(networkManager);
+
+            qWebView->setPage(page);
+
+            qWebView->load(QUrl("..."));*/
+
             QString url = getServiceUrl().append(getServiceParams());
-            resData = Network::NetworkManager().GET(url);
+            resData = Network::NetworkManager().GET(reqUrl);
             if(resData.size())
             {
                 result = QString().fromStdString(resData.toStdString());

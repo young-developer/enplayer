@@ -30,8 +30,11 @@ public:
     void resizeEvent(QResizeEvent *);
 
     bool isFullScreen();
+    ENPlayer *Player() const;
+    void setPlayer(ENPlayer *enPlayer);
+
 signals:
-       void resized();
+    void resized();
 private slots:
     void on_actionOpen_triggered();
 

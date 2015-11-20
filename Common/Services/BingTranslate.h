@@ -7,6 +7,7 @@ class BingTranslate : public ITranslateService
 {
 public:
     BingTranslate();
+    bool Translate(QString text, QString &result);
 };
 
 #endif // BINGTRANSLATE_H

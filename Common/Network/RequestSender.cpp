@@ -1,5 +1,4 @@
 #include <QtNetwork>
-
 #include "Request.h"
 #include "RequestSender.h"
 #include "qtexception.h"
@@ -70,12 +69,10 @@ namespace Network
         QNetworkReply* reply = getRequest ? manager->get(request.request()) :
                                             manager->post(request.request(false), request.data());
 
-#ifdef QT_DEBUG
         if (getRequest)
             qInfo() << "[GET] " <<  request.request().url().toString();
         else
             qInfo() << "[POST]" << request.request(false).url().toString() << request.data();
-#endif
 
         QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         QObject::connect(&timer, &QTimer::timeout, reply, &QNetworkReply::abort);
@@ -88,6 +85,16 @@ namespace Network
         if (reply->isFinished() && reply->error() == QNetworkReply::NoError)
         {
             data = reply->readAll();
+            int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+            switch (statusCode) {
+                case 301:
+                case 302:
+                case 307:
+                QString redirectUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl().toString();
+                qInfo() << "redirected: " << redirectUrl;
+                sendRequest(Request(redirectUrl));
+                break;
+            }
             _error = RequestSender::NoError;
         }
         else

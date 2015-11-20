@@ -4,6 +4,7 @@
 
 namespace Network
 {
+class Request;
     class NetworkManager : public QObject
     {
 
@@ -11,6 +12,8 @@ namespace Network
         NetworkManager();
         QByteArray GET(QString url);
         QByteArray POST(QString url);
+        QByteArray GET(Request reqUrl);
+        QByteArray POST(Request reqUrl);
         bool isOnline();
     };
 }

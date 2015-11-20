@@ -6,7 +6,7 @@
 
 TranslateManager::TranslateManager()
 {
-    setDefaultTranslateService(new GoogleTranslate());
+    setDefaultTranslateService(new YandexTranslate());
 }
 
 TranslateManager::TranslateManager(ITranslateService* defaultTranslateService)

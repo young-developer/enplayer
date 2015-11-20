@@ -21,6 +21,17 @@ namespace Network
         return RequestSender(15000).post(Request(url));//get request 15sec
     }
 
+    QByteArray NetworkManager::GET(Request reqUrl)
+    {
+        return RequestSender(15000).get(reqUrl);//get request 15sec
+    }
+
+    QByteArray NetworkManager::POST(Request reqUrl)
+    {
+        return RequestSender(15000).post(reqUrl);//get request 15sec
+    }
+
+
     bool NetworkManager::isOnline()
     {
         QList<QNetworkInterface> iFaces = QNetworkInterface::allInterfaces();

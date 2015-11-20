@@ -3,16 +3,20 @@
 # Project created by QtCreator 2015-08-01T16:33:02
 # Project Semantic Versioning http://semver.org/
 #-------------------------------------------------
-VERSION = 0.6.0
 
-DEFINES += VERSION_NUMBER=\\\"0.6.0\\\"
+win32:VERSION = 0.6.8.0 # major.minor.patch.build
+else:VERSION = 0.6.0    # major.minor.patch
+
+DEFINES += APP_VERSION_NUMBER=\\\"0.6.8\\\"
 DEFINES += APP_NAME=\\\"EnPlayer\\\"
+DEFINES += APP_LOG_FILENAME=\\\"log.txt\\\"
 
-QT       += core gui widgets network
+QT       += core gui widgets network xml
 
 TARGET = Player
 TEMPLATE = app
 
+PKGCONFIG += openssl
 
 SOURCES += main.cpp\
         mainwindow.cpp

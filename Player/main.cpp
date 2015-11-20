@@ -1,12 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "exapp.h"
-#include <QtDebug>
-#include <QFile>
-#include <QTextStream>
-#include <QDateTime>
-#include "qtexception.h"
-#include "exmessagebox.h"
+#include "commonexception.h"
 
 inline QTextStream& qStdout()
 {
@@ -16,13 +11,15 @@ inline QTextStream& qStdout()
 
 void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, const QString &msg)
 {
-    QString txt;
+    QString txt="";
     switch (type) {
     case QtDebugMsg:
         txt = QString("Debug: %1 (%2 %3 %4)").arg(msg).arg(context.file).arg(context.line).arg(context.function);
         break;
     case QtInfoMsg:
+#ifdef QT_DEBUG
         txt = QString("Info: %1").arg(msg);
+#endif
         break;
     case QtWarningMsg:
         txt = QString("Warning: %1 (%2 %3 %4)").arg(msg).arg(context.file).arg(context.line).arg(context.function);
@@ -34,11 +31,14 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
         txt = QString("Fatal: %1 (%2 %3 %4)").arg(msg).arg(context.file).arg(context.line).arg(context.function);
     break;
     }
-    qStdout()<<txt<<endl;
-    QFile outFile("log.txt");
-    outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-    QTextStream ts(&outFile);
-    ts <<QDateTime().currentDateTime().toString()<<" : "<< txt << endl;
+    if(!txt.isEmpty())
+    {
+        qStdout()<<txt<<endl;
+        QFile outFile(APP_LOG_FILENAME);
+        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+        QTextStream ts(&outFile);
+        ts <<QDateTime().currentDateTime().toString()<<" : "<< txt << endl;
+    }
     if(type == QtFatalMsg)
     {
         abort();
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(fileMessageHandler);
     ExApplication a(argc, argv);
     a.setApplicationName(APP_NAME);
-    a.setApplicationVersion(VERSION_NUMBER);
+    a.setApplicationVersion(APP_VERSION_NUMBER);
     MainWindow w;
     w.show();
 

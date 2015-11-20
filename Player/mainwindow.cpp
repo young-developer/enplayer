@@ -4,24 +4,22 @@
 #include <QFileDialog>
 #include <QTimer>
 
-#include "exmessagebox.h"
-#include "qtexception.h"
-#include "enplayer.h"
-#include "controlpanel.h"
-#include "Subtitles/subtitlepanel.h"
-#include "ui_aboutdialog.h"
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "commonexception.h"
+#include "domainlogic.h"
 
+#include "ui_aboutdialog.h"
+#include "ui_mainwindow.h"
+#include "mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    _enPlayer(nullptr)
 {
     ui->setupUi(this);
     aboutDialog = nullptr;
     aboutDialogUI = nullptr;
-    setWindowTitle("EN Player v."+QString(VERSION_NUMBER));
+    setWindowTitle("EN Player v."+QString(APP_VERSION_NUMBER));
 
     centralWidget()->setMouseTracking(true);
     setMouseTracking(true);
@@ -31,23 +29,47 @@ MainWindow::MainWindow(QWidget *parent) :
     _idleTimer->setInterval(3000);//idle interval 3sec
     connect(_idleTimer, SIGNAL(timeout()), this, SLOT(on_Idle()));
     _idleTimer->start();
-    _enPlayer = new ENPlayer(ui->videoWidget);
+
+    setPlayer(new ENPlayer(ui->videoWidget));
     _subPanel = new SubtitlePanel(this);
-    _enPlayer->setControlPanel(ui->controlPanel);
-    _enPlayer->setSubtitlePanel(_subPanel);
+    Player()->setControlPanel(ui->controlPanel);
+    Player()->setSubtitlePanel(_subPanel);
+
+#ifdef QT_DEBUG
+    QString videoFilePath = "test_video.mp4";
+    QString subFilePath = "test_sub.srt";
+    Player()->openFile(videoFilePath,false);
+    Player()->addSubtitles(subFilePath);
+#endif
+
     connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));
+}
+
+ENPlayer *MainWindow::Player() const
+{
+    if(_enPlayer!=nullptr)
+    {
+        return _enPlayer;
+    }
+    else
+    {
+        throw NullPointerException<ENPlayer*>(_enPlayer);
+    }
+}
+
+void MainWindow::setPlayer(ENPlayer *enPlayer)
+{
+    _enPlayer = enPlayer;
 }
 
 MainWindow::~MainWindow()
 {
-#ifdef QT_DEBUG
-    qInfo()<<("Application was closed");
-#endif
     delete _subPanel;
     delete _enPlayer;
     delete aboutDialogUI;
     delete aboutDialog;
     delete ui;
+    qInfo()<<("Application was closed");
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -60,7 +82,7 @@ void MainWindow::on_actionOpen_triggered()
             return;
     try
     {
-        _enPlayer->openFile(fileName);
+        Player()->openFile(fileName);
     }
     catch(QtException ex)
     {
@@ -70,9 +92,7 @@ void MainWindow::on_actionOpen_triggered()
     {
         ExMessageBox(QtException(ExceptionType::Undefined,"Undefined open video file exception"),"exception").exec();
     }
-#ifdef QT_DEBUG
     qInfo()<<("Open file: "+fileName);
-#endif
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -117,10 +137,8 @@ void MainWindow::on_Idle()
         ui->controlPanel->hidePanel();
         ui->menuBar->hide();
         setCursor(Qt::BlankCursor);
-        _enPlayer->refreshFrame();
-#ifdef QT_DEBUG
+        Player()->refreshFrame();
         qInfo()<<"Idle mode";
-#endif
     }
 }
 
@@ -157,10 +175,8 @@ void MainWindow::on_actionAdd_Subtitles_triggered()
     if (fileName.isEmpty())
             return;
 
-    _enPlayer->addSubtitles(fileName);
-#ifdef QT_DEBUG
+    Player()->addSubtitles(fileName);
     qInfo()<<("Sub file was added : "+fileName);
-#endif
 }
 
 void MainWindow::on_actionShow_log_triggered()
@@ -175,7 +191,7 @@ void MainWindow::on_actionAbout_triggered()
        aboutDialog = new QDialog(this);
        aboutDialogUI = new Ui::AboutDialog;
        aboutDialogUI->AppName->setText(APP_NAME);
-       aboutDialogUI->Version->setText(VERSION_NUMBER);
+       aboutDialogUI->Version->setText(APP_VERSION_NUMBER);
        aboutDialogUI->DescText->setText("EN Player - simple video player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence.");
        aboutDialogUI->setupUi(aboutDialog);
     }

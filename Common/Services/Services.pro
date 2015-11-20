@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += widgets network
+QT       += widgets network xml
 TARGET = Services
 TEMPLATE = lib
 CONFIG += staticlib

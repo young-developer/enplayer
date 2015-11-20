@@ -13,12 +13,15 @@ CONFIG += staticlib
 SOURCES += \
     exapp.cpp \
     exmessagebox.cpp \
-    qtexception.cpp
+    qtexception.cpp \
+    nullpointerexception.cpp
 
 HEADERS += \
     exapp.h \
     exmessagebox.h \
-    qtexception.h
+    qtexception.h \
+    nullpointerexception.h \
+    commonexception.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
