@@ -1,6 +1,6 @@
 # EN Player
 EN Player is a free and open source cross-platform video player that plays most video files (based on VLC player) and helps user to watch videos in english(or other foreign language) with subtitles and understand each word and sentence.
-The main idea of player is subtitles translation and automatic play/pause behaviour. Tooltip with translated text will appear after hovering over a certain word and video will be paused automaticly.
+The main idea of player is subtitles translation and automatic play/pause behaviour. Tooltip with translated text will appear automaticly after hovering over a certain word and video will be paused.
 ___
 #### Requirements
 - QT 5.5.0  http://www.qt.io/developers/
