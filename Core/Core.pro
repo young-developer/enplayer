@@ -4,4 +4,5 @@ CONFIG += ordered
 
 SUBDIRS += \
     GUI \
-    DomainLogic
+    DomainLogic \
+    Interfaces
