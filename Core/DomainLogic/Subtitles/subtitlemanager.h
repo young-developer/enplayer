@@ -2,6 +2,13 @@
 #define SUBTITLEMANAGER_H
 #include <QObject>
 #include "TranslateManager.h"
+#include "Subtitles/subtitlepanel.h"
+#include "Subtitles/subtitlelabel.h"
+#include <SubtitleParser.h>
+#include <SubtitleParserFactory.h>
+#include "customtooltip.h"
+#include <QHash>
+
 class SubtitleParser;
 class SubtitlePanel;
 class SubtitleLabel;

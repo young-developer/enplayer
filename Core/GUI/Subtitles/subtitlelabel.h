@@ -2,7 +2,7 @@
 #define SUBTITLELABEL_H
 
 #include <QLabel>
-
+#include <QDebug>
 class SubtitleItem;
 
 class SubtitleLabel : public QLabel
@@ -12,7 +12,6 @@ class SubtitleLabel : public QLabel
 public:
     explicit SubtitleLabel(QWidget *parent = 0);
     explicit SubtitleLabel(QString text, QWidget *parent = 0);
-    explicit SubtitleLabel(SubtitleItem *item, QWidget *parent = 0);
 signals:
     void clicked();
     void doubleClicked();
@@ -27,8 +26,6 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void enterEvent(QEvent *event);
     void leaveEvent(QEvent *event);
-private:
-    SubtitleItem* _subItem;
 };
 
 #endif // SUBTITLELABEL_H

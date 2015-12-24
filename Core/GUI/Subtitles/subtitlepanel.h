@@ -2,6 +2,18 @@
 #define SUBTITLEPANEL_H
 
 #include <QWidget>
+#include <QMouseEvent>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QPainter>
+#include <QPainterPath>
+#include <QtWidgets>
+#include <QStyleOption>
+#include <QDragEnterEvent>
+#include <QStringBuilder>
+#include "Subtitles/subtitlelabel.h"
+#include "Layout/flowlayout.h"
+
 class MainWindow;
 class SubtitleLabel;
 class SubtitleItem;
@@ -20,6 +32,7 @@ public:
     void setFont(QFont font);
     unsigned short getOpacity() const;
     void setOpacity(unsigned short opacity);
+    QString getSubtitlesAsString();
     void enterEvent(QEvent *);
     void leaveEvent(QEvent *);
 signals:

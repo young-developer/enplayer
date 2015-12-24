@@ -1,10 +1,4 @@
-#include <QPushButton>
-#include "vlc-qt/WidgetSeek.h"
-#include "vlc-qt/WidgetVolumeSlider.h"
-#include <vlc-qt/MediaPlayer.h>
-#include "Subtitles/subtitlepanel.h"
 #include "controlpanel.h"
-
 
 ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _playButton(0),

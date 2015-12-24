@@ -1,14 +1,4 @@
 #include "Subtitles/subtitlepanel.h"
-#include "Subtitles/subtitlelabel.h"
-#include "Layout/flowlayout.h"
-#include <QMouseEvent>
-#include <QApplication>
-#include <QDesktopWidget>
-#include <QPainter>
-#include <QPainterPath>
-#include <QtWidgets>
-#include <QStyleOption>
-#include <QDragEnterEvent>
 
 SubtitlePanel::SubtitlePanel(QWidget *parent,bool isFixed) : QWidget(parent),_fixed(isFixed)
 {
@@ -82,6 +72,19 @@ void SubtitlePanel::setOpacity(unsigned short int opacity)
     }
 }
 
+QString SubtitlePanel::getSubtitlesAsString()
+{
+    QString string = "";
+    foreach(SubtitleLabel *sub, _subtitles)
+    {
+        if(sub!=nullptr)
+        {
+            string.append(sub->text()+" ");
+        }
+    }
+    return string;
+}
+
 void SubtitlePanel::enterEvent(QEvent *)
 {
     emit mouseEntered();
@@ -136,8 +139,9 @@ void SubtitlePanel::clearSubtitles()
 {
     foreach(SubtitleLabel *sub, _subtitles)
     {
+        disconnect(sub, 0, 0, 0);
         if(sub)
-            delete sub;
+           sub->deleteLater();
     }
     _subtitles.clear();
 }

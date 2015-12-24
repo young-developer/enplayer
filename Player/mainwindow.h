@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtDebug>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFileDialog>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -32,7 +37,6 @@ public:
     bool isFullScreen();
     ENPlayer *Player() const;
     void setPlayer(ENPlayer *enPlayer);
-
 signals:
     void resized();
 private slots:

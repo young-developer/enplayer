@@ -1,12 +1,5 @@
-#include "Subtitles/subtitlepanel.h"
-#include "Subtitles/subtitlelabel.h"
-#include <SubtitleParser.h>
-#include <SubtitleParserFactory.h>
-#include <QHash>
-#include <QDebug>
-#include "qtexception.h"
-#include "exmessagebox.h"
 #include "subtitlemanager.h"
+#include "commonexception.h"
 
 void SubtitleManager::updateSubtitles(int position)
 {
@@ -14,7 +7,13 @@ void SubtitleManager::updateSubtitles(int position)
     {
         if(item->getStartTime() <= position && item->getEndTime() >= position )
         {
-            _subPanel->setSubtitles(splitSubtitleToWords(item));
+            QString currentSubText(item->getText().c_str());
+            currentSubText.replace("\n"," ");
+            if(_subPanel->getSubtitlesAsString().simplified() != currentSubText.simplified() && !currentSubText.simplified().isEmpty())
+            {
+                _subPanel->setSubtitles(splitSubtitleToWords(item));
+                qInfo()<<"Subtitle were created!"<<_subPanel->getSubtitlesAsString();
+            }
         }
     }
 }
@@ -30,7 +29,12 @@ void SubtitleManager::Translate()
             isTranslated = _translateMgr->Translate(label->text(),result/*out*/);
 
         if(isTranslated)
-            label->setToolTip(result);
+        {
+            if(label!=nullptr)
+            {
+                //CustomTooltip *toolTip = new CustomTooltip(label);
+            }
+        }
     }
 }
 
@@ -50,7 +54,7 @@ QList<SubtitleLabel*> SubtitleManager::splitSubtitleToWords(SubtitleItem *sub)
     QList<SubtitleLabel*> subWordList;
     foreach(QString word, QString(sub->getText().c_str()).replace("\n"," ").split(" ", QString::SkipEmptyParts))
     {
-        subWordList.append(new SubtitleLabel(word));
+        subWordList.append(new SubtitleLabel(word.simplified()));
         //qInfo()<<word;
     }
     //connect TranslateManager

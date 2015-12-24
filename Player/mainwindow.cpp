@@ -1,9 +1,3 @@
-#include <QtDebug>
-#include <QDesktopServices>
-#include <QUrl>
-#include <QFileDialog>
-#include <QTimer>
-
 #include "commonexception.h"
 #include "domainlogic.h"
 
@@ -40,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QString subFilePath = "test_sub.srt";
     Player()->openFile(videoFilePath,false);
     Player()->addSubtitles(subFilePath);
+    Player()->play();
 #endif
 
     connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));

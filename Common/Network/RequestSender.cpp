@@ -105,9 +105,7 @@ namespace Network
 
         reply->deleteLater();
 
-#ifdef QT_DEBUG
         qInfo() << "[ANSWER]" << data;
-#endif
 
         return data;
     }

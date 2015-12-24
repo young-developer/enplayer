@@ -36,10 +36,11 @@ bool YandexTranslate::Translate(QString text, QString &result)
         {
             qInfo()<<reqUrl.url();
             QDomDocument doc;
-            doc.setContent(QString().fromStdString(resData.toStdString()).toUtf8());
+            QString data = QString::fromUtf8(resData);
+            doc.setContent(data);
             QDomNodeList list=doc.elementsByTagName("text");
-            QString result=list.at(0).toElement().text().toUtf8();
-            qInfo()<<"Word: "<<text<<" - translation: "<<result;
+
+            qInfo()<<"Word: "<<text<<" - translation: "<<QString::fromUtf8(list.at(0).toElement().text().toUtf8());
         }
     }
     catch(QtException ex)

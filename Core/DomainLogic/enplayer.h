@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <vlc-qt/WidgetVideo.h>
+#include "domainlogic.h"
+
 class VlcInstance;
 class VlcMedia;
 class VlcMediaPlayer;
@@ -41,6 +43,7 @@ public:
     void setSubtitlePanel(SubtitlePanel *subPanel);
     void openFile(QString fileName, bool autoPlay = true);
     void addSubtitles(QString fileName);
+    void clearSubtitles();
     void play();
     void pause();
     void stop();

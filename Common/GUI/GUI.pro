@@ -11,11 +11,13 @@ CONFIG += staticlib
 
 SOURCES += \
     Layout/flowlayout.cpp \
-    gui-cmn.cpp
+    gui-cmn.cpp \
+    customtooltip.cpp
 
 HEADERS += \
     Layout/flowlayout.h \
-    gui-cmn.h
+    gui-cmn.h \
+    customtooltip.h
 
 unix {
     target.path = /usr/lib

@@ -1,4 +1,4 @@
-#include "domainlogic.h"
+#include "enplayer.h"
 #include "commonexception.h"
 
 ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QObject *parent): QObject(parent),
@@ -83,12 +83,19 @@ void ENPlayer::openFile(QString fileName,bool autoPlay)
     vlcPlayer()->open(_media);
     if(true == autoPlay)
         vlcPlayer()->play();
+    clearSubtitles();
 }
 
 void ENPlayer::addSubtitles(QString fileName)
 {
     _subManager->loadSubtitleFile(fileName);
     _subPanel->show();
+}
+
+void ENPlayer::clearSubtitles()
+{
+    _subManager->clearSubtitles();
+    _subPanel->hide();
 }
 
 void ENPlayer::play()
@@ -111,5 +118,5 @@ VlcMediaPlayer *ENPlayer::vlcPlayer() const
     if(_vlcPlayer!=nullptr)
         return _vlcPlayer;
     else
-        throw NullPointerException<VlcMediaPlayer*>(_vlcPlayer);
+        return nullptr;
 }

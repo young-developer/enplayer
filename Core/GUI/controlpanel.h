@@ -4,10 +4,14 @@
 #include <QObject>
 #include <QtWidgets>
 #include "vlc-qt/WidgetVideo.h"
+#include "vlc-qt/WidgetSeek.h"
+#include "vlc-qt/WidgetVolumeSlider.h"
+#include <vlc-qt/MediaPlayer.h>
+#include "Subtitles/subtitlepanel.h"
+
 class VlcWidgetSeek;
 class VlcWidgetVolumeSlider;
 class VlcMediaPlayer;
-
 class QPushButton;
 
 class ControlPanel : public QWidget

@@ -4,8 +4,8 @@
 # Project Semantic Versioning http://semver.org/
 #-------------------------------------------------
 
-win32:VERSION = 0.6.8.0 # major.minor.patch.build
-else:VERSION = 0.6.0    # major.minor.patch
+win32:VERSION = 0.6.8.1 # major.minor.patch.build
+else:VERSION = 0.6.8    # major.minor.patch
 
 DEFINES += APP_VERSION_NUMBER=\\\"0.6.8\\\"
 DEFINES += APP_NAME=\\\"EnPlayer\\\"
@@ -27,6 +27,21 @@ FORMS    += mainwindow.ui \
     aboutdialog.ui
 
 # Edit below for custom library location
+
+#Common application GUI
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
+else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
+
+INCLUDEPATH += $$PWD/../Common/GUI
+DEPENDPATH += $$PWD/../Common/GUI
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
 
 #Exceptions
 
@@ -72,21 +87,6 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Comm
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/release/Services.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/debug/Services.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/libServices.a
-
-#Common application GUI
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
-else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
-
-INCLUDEPATH += $$PWD/../Common/GUI
-DEPENDPATH += $$PWD/../Common/GUI
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
 
 # LibVLC
 unix|win32: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt
