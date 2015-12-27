@@ -2,6 +2,14 @@
 #define GOOGLETRANSLATE_H
 
 #include <QObject>
+#include "ITranslateService.h"
+#include "NetworkManager.h"
+#include "request.h"
+#include <QUrl>
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 class ITranslateService;
 class FileDownloader;
 class GoogleTranslate : public ITranslateService

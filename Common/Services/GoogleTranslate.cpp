@@ -1,13 +1,5 @@
-#include "qtexception.h"
-#include "exmessagebox.h"
-#include "ITranslateService.h"
-#include "NetworkManager.h"
 #include "GoogleTranslate.h"
-#include "request.h"
-#include <QUrl>
-#include <QDebug>
-#include <QJsonDocument>
-#include <QJsonObject>
+#include "commonexception.h"
 
 bool GoogleTranslate::isLocked() const
 {
