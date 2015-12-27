@@ -36,7 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     Player()->addSubtitles(subFilePath);
     Player()->play();
 #endif
-
+    //test teamcity
+    ui->testteamcity =
     connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));
 }
 
