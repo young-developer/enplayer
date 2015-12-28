@@ -30,7 +30,7 @@ QtException::QtException(ExceptionType exType,QString msg):exception(msg.toStdSt
     setType(exType);
     setMessage(msg);
     if(exType != ExceptionType::Information)
-        qCritical()<<getTypeAsString()<<" "<<what();
+        qCritical()<<getTypeAsString()<<"::"<<what();
     else
         qInfo()<<getTypeAsString()<<"::"<<what();
 }
