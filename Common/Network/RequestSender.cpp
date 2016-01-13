@@ -70,9 +70,9 @@ namespace Network
                                             manager->post(request.request(false), request.data());
 
         if (getRequest)
-            qInfo() << "[GET] " <<  request.request().url().toString();
+            qDebug() << "[GET] " <<  request.request().url().toString();
         else
-            qInfo() << "[POST]" << request.request(false).url().toString() << request.data();
+            qDebug() << "[POST]" << request.request(false).url().toString() << request.data();
 
         QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         QObject::connect(&timer, &QTimer::timeout, reply, &QNetworkReply::abort);
@@ -91,7 +91,7 @@ namespace Network
                 case 302:
                 case 307:
                 QString redirectUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl().toString();
-                qInfo() << "redirected: " << redirectUrl;
+                qDebug() << "redirected: " << redirectUrl;
                 sendRequest(Request(redirectUrl));
                 break;
             }
@@ -105,7 +105,7 @@ namespace Network
 
         reply->deleteLater();
 
-        qInfo() << "[ANSWER]" << data;
+        qDebug() << "[ANSWER]" << data;
 
         return data;
     }

@@ -81,7 +81,7 @@ void ControlPanel::onToggleSubtitlesBtnClicked()
 void ControlPanel::onPlayButtonClicked()
 {
     emit playButtonClicked();
-    qInfo()<<"onPlayButtonClicked::togglePause";
+    qDebug()<<"onPlayButtonClicked::togglePause";
 }
 
 void ControlPanel::onToggleFullScreenBtnClicked()

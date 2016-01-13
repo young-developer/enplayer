@@ -54,7 +54,7 @@ bool GoogleTranslate::Translate(QString text, QString &result)
                 result = QString().fromStdString(resData.toStdString());
                 QJsonDocument jsonResponse = QJsonDocument::fromJson(result.toUtf8());
                 QString transWord = jsonResponse.object().find("sentences").value().toString();
-                qInfo()<<"Word: "<<text<<" - translation: "<<transWord;
+                qDebug()<<"Word: "<<text<<" - translation: "<<transWord;
             }
         }
     }

@@ -12,7 +12,7 @@ void SubtitleManager::updateSubtitles(int position)
             if(_subPanel->getSubtitlesAsString().simplified() != currentSubText.simplified() && !currentSubText.simplified().isEmpty())
             {
                 _subPanel->setSubtitles(splitSubtitleToWords(item));
-                qInfo()<<"Subtitle were created!"<<_subPanel->getSubtitlesAsString();
+                qDebug()<<"Subtitle were created!"<<_subPanel->getSubtitlesAsString();
             }
         }
     }

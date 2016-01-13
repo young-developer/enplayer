@@ -42,7 +42,7 @@ void SubtitleLabel::enterEvent(QEvent *event)
     Q_UNUSED(event);
     setStyleSheet("color:red;");
 
-    qInfo()<<"SubtitleLabel:'"<<this->text()<<"' enter event was fired!";
+    qDebug()<<"SubtitleLabel:'"<<this->text()<<"' enter event was fired!";
 
     emit mouseEntered();
 }

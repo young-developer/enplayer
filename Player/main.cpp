@@ -16,11 +16,11 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
     case QtDebugMsg:
         txt = QString("Debug: %1 (%2 %3 %4)").arg(msg).arg(context.file).arg(context.line).arg(context.function);
         break;
-    case QtInfoMsg:
+    /*case QtInfoMsg:
 #ifdef QT_DEBUG
         txt = QString("Info: %1").arg(msg);
 #endif
-        break;
+        break;*/
     case QtWarningMsg:
         txt = QString("Warning: %1 (%2 %3 %4)").arg(msg).arg(context.file).arg(context.line).arg(context.function);
     break;

@@ -27,11 +27,11 @@ void CustomTooltip::mouseMoveEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
     if (parentWidget()->rect().contains(event->pos())) {
-        qInfo()<<"mouseOverParent";
+        qDebug()<<"mouseOverParent";
         emit mouseOverParent();
     }
     else {
-        qInfo()<<"mouseOutParent";
+        qDebug()<<"mouseOutParent";
         emit mouseOutParent();
     }
 }

@@ -29,13 +29,13 @@ MainWindow::MainWindow(QWidget *parent) :
     Player()->setControlPanel(ui->controlPanel);
     Player()->setSubtitlePanel(_subPanel);
 
-#ifdef QT_DEBUG
+/*#ifdef QT_DEBUG
     QString videoFilePath = "test_video.mp4";
     QString subFilePath = "test_sub.srt";
     Player()->openFile(videoFilePath,false);
     Player()->addSubtitles(subFilePath);
     Player()->play();
-#endif
+#endif*/
     connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));
 }
 
@@ -63,7 +63,7 @@ MainWindow::~MainWindow()
     delete aboutDialogUI;
     delete aboutDialog;
     delete ui;
-    qInfo()<<("Application was closed");
+    qDebug()<<("Application was closed");
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -86,7 +86,7 @@ void MainWindow::on_actionOpen_triggered()
     {
         ExMessageBox(QtException(ExceptionType::Undefined,"Undefined open video file exception"),"exception").exec();
     }
-    qInfo()<<("Open file: "+fileName);
+    qDebug()<<("Open file: "+fileName);
 }
 
 void MainWindow::on_actionExit_triggered()
@@ -132,7 +132,7 @@ void MainWindow::on_Idle()
         ui->menuBar->hide();
         setCursor(Qt::BlankCursor);
         Player()->refreshFrame();
-        qInfo()<<"Idle mode";
+        qDebug()<<"Idle mode";
     }
 }
 
@@ -170,7 +170,7 @@ void MainWindow::on_actionAdd_Subtitles_triggered()
             return;
 
     Player()->addSubtitles(fileName);
-    qInfo()<<("Sub file was added : "+fileName);
+    qDebug()<<("Sub file was added : "+fileName);
 }
 
 void MainWindow::on_actionShow_log_triggered()

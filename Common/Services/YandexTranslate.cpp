@@ -34,13 +34,13 @@ bool YandexTranslate::Translate(QString text, QString &result)
         resData = Network::NetworkManager().GET(reqUrl);
         if(resData.size())
         {
-            qInfo()<<reqUrl.url();
+            qDebug()<<reqUrl.url();
             QDomDocument doc;
             QString data = QString::fromUtf8(resData);
             doc.setContent(data);
             QDomNodeList list=doc.elementsByTagName("text");
 
-            qInfo()<<"Word: "<<text<<" - translation: "<<QString::fromUtf8(list.at(0).toElement().text().toUtf8());
+            qDebug()<<"Word: "<<text<<" - translation: "<<QString::fromUtf8(list.at(0).toElement().text().toUtf8());
         }
     }
     catch(QtException ex)
