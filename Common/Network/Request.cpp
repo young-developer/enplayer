@@ -59,6 +59,10 @@ namespace Network
         if (!forGetRequest)
         {
             r.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+            r.setRawHeader( "User-Agent", "Mozilla/5.0 (X11; U; Linux i686 (x86_64); "
+                                       "en-US; rv:1.9.0.1) Gecko/2008070206 Firefox/3.0.1" );
+            r.setRawHeader( "charset", "utf-8" );
+            r.setRawHeader( "Connection", "keep-alive" );
         }
 
         return r;
