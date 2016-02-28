@@ -28,21 +28,6 @@ FORMS    += mainwindow.ui \
 
 # Edit below for custom library location
 
-#Common application GUI
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
-else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
-
-INCLUDEPATH += $$PWD/../Common/GUI
-DEPENDPATH += $$PWD/../Common/GUI
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
-
 #Exceptions
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/Exceptions/release/ -lExceptions
@@ -57,6 +42,21 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Comm
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Exceptions/release/Exceptions.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Exceptions/debug/Exceptions.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Exceptions/libExceptions.a
+
+#Common application GUI
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
+else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
+
+INCLUDEPATH += $$PWD/../Common/GUI
+DEPENDPATH += $$PWD/../Common/GUI
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
 
 #Qt Network wrapper
 
@@ -129,10 +129,9 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/libDomainLogic.a
 
 #Subtitle Parser library
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
+else:unix: LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Release/release/ -lSubParser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/debug/ -lSubParser
-else:unix: LIBS += -L$$PWD/../../SubParser/build-SubParser-Desktop_Qt_5_5_0_MSVC2013_64bit-Debug/ -lSubParser
-
-INCLUDEPATH += $$PWD/../../SubParser
-DEPENDPATH += $$PWD/../../SubParser
+INCLUDEPATH += $$PWD/../Core/3dparty/sub-parser/include
+DEPENDPATH += $$PWD/../Core/3dparty/sub-parser/include
