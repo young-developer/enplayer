@@ -1,0 +1,11 @@
+stages:
+  - qmake
+  - make
+qmake_job:
+  stage: qmake
+  script:
+  - qmake
+make_job:
+  stage: make
+  script:
+  - make
