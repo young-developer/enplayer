@@ -1,11 +1,7 @@
 stages:
-  - qmake
-  - make
-qmake_job:
-  stage: qmake
+  - build
+build_job:
+  stage: build
   script:
-  - qmake
-make_job:
-  stage: make
-  script:
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make

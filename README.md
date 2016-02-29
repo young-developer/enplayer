@@ -4,7 +4,7 @@ The main idea of player is subtitles translation and automatic play/pause behavi
 ___
 #### Requirements
 - QT 5.5.0  http://www.qt.io/developers/
-- LibVLC-Qt  https://github.com/vlc-qt/
+- LibVLC-Qt  https://github.com/vlc-qt/ ( https://vlc-qt.tano.si/ )
 - LibSub-Parser https://github.com/young-developer/subtitle-parser
 
 ___
