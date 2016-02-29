@@ -8,9 +8,6 @@ ___
 - LibSub-Parser https://github.com/young-developer/subtitle-parser
 
 ___
-#### For developers
-###### YouTrack - https://enplayer.myjetbrains.com
-___
 ##### General Public License (GNU GPLv3)
 ```
 This program is free software: you can redistribute it and/or modify
