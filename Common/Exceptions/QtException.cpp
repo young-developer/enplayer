@@ -17,7 +17,7 @@ void QtException::setType(const ExceptionType &exType)
 
 void QtException::setMessage(QString msg)
 {
-    exception(msg.toStdString().c_str());
+    exception();
 }
 
 QtException::QtException():exception()
@@ -25,7 +25,7 @@ QtException::QtException():exception()
     QtException(ExceptionType::Undefined,QString("Undefined exception::").append(what()));
 }
 
-QtException::QtException(ExceptionType exType,QString msg):exception(msg.toStdString().c_str())
+QtException::QtException(ExceptionType exType,QString msg):exception()
 {
     setType(exType);
     setMessage(msg);
