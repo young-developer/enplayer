@@ -11,7 +11,7 @@
 #include <QStyleOption>
 #include <QDragEnterEvent>
 #include <QStringBuilder>
-#include "Subtitles/subtitlelabel.h"
+#include "subtitlelabel.h"
 #include "Layout/flowlayout.h"
 
 class MainWindow;

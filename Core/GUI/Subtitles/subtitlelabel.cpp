@@ -1,4 +1,4 @@
-#include "Subtitles/subtitlelabel.h"
+#include "subtitlelabel.h"
 
 SubtitleLabel::SubtitleLabel(QWidget *parent) : QLabel(parent)
 {
