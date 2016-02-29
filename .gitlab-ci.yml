@@ -3,5 +3,5 @@ stages:
 build_job:
   stage: build
   script:
-  - qmake ENPlayer.pro
+  - qmake ENPlayer.pro -r -d -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make
