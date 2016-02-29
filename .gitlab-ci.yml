@@ -1,11 +1,7 @@
 stages:
-  - qmake
-  - make
-qmake_job:
-  stage: qmake
+  - build
+build_job:
+  stage: build
   script:
   - qmake ENPlayer.pro
-make_job:
-  stage: make
-  script:
   - make
