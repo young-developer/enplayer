@@ -26,8 +26,7 @@ core_build_job:
 player_build_job:
   stage: player_build
   script:
-  - for a_file in *;do mv -v $a_file `echo $a_file | tr [:upper:] [:lower:]` ;done;
-  - qmake enplayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make
   only:
     - master
@@ -35,8 +34,7 @@ player_build_job:
 cleanup_build_job:
   stage: cleanup_build
   script:
-  - for a_file in *;do mv -v $a_file `echo $a_file | tr [:upper:] [:lower:]` ;done;
-  - qmake enplayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make clean
   when: on_failure
   only:
