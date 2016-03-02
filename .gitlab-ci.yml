@@ -8,7 +8,7 @@ common_build_job:
   script:
   - cd Common
   - for a_file in *;do mv -v $a_file `echo $a_file | tr [:upper:] [:lower:]` ;done;
-  - qmake common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - qmake common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
     - master
@@ -18,7 +18,7 @@ core_build_job:
   script:
   - cd Core
   - for a_file in *;do mv -v $a_file `echo $a_file | tr [:upper:] [:lower:]` ;done;
-  - qmake core.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - qmake core.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
     - master
@@ -26,7 +26,7 @@ core_build_job:
 player_build_job:
   stage: player_build
   script:
-  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
     - master
@@ -34,7 +34,7 @@ player_build_job:
 cleanup_build_job:
   stage: cleanup_build
   script:
-  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make clean
   when: on_failure
   only:
