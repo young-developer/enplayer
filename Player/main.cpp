@@ -47,7 +47,9 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
 
 int main(int argc, char *argv[])
 {
+    #ifdef QT_DEBUG
     qInstallMessageHandler(fileMessageHandler);
+    #endif
     ExApplication a(argc, argv);
     a.setApplicationName(APP_NAME);
     a.setApplicationVersion(APP_VERSION_NUMBER);
