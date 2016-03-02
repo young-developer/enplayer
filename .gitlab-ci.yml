@@ -2,17 +2,20 @@ stages:
   - common_build
   - core_build
   - player_build
-build_job:
+  - cleanup_build
+common_build_job:
   stage: common_build
   script:
   - cd Common
   - qmake Common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make
+core_build_job:
   stage: core_build
   script:
   - cd Core
   - qmake Core.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make
+player_build_job:
   stage: player_build
   script:
   - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
@@ -20,3 +23,9 @@ build_job:
   only:
     - master
     - develop
+cleanup_build_job:
+  stage: cleanup_build
+  script:
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - make clean
+  when: on_failure
