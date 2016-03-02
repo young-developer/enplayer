@@ -22,10 +22,10 @@ namespace Network
 
         void setProxy(const QNetworkProxy& proxy);
 
-        QByteArray get(Request& request);
-        QByteArray post(Request& request);
-        QByteArray getWhileSuccess(Request& request, int maxCount = 2);
-        QByteArray postWhileSuccess(Request& request, int maxCount = 2);
+        QByteArray get(const Request &request);
+        QByteArray post(const Request &request);
+        QByteArray getWhileSuccess(const Request& request, int maxCount = 2);
+        QByteArray postWhileSuccess(const Request& request, int maxCount = 2);
 
         void setMaxWaitTime(qint64 max);
 
@@ -33,8 +33,8 @@ namespace Network
         RequestError error() const;
 
     private:
-        QByteArray sendRequest(Request& request, bool getRequest = true);
-        QByteArray sendWhileSuccess(Request& request, int maxCount = 2, bool getRequest = true);
+        QByteArray sendRequest(const Request& request, bool getRequest = true);
+        QByteArray sendWhileSuccess(const Request& request, int maxCount = 2, bool getRequest = true);
 
     private:
         qint64 _maxWaitTime;
