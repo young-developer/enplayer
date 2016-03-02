@@ -2,12 +2,14 @@
 
 ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     _playButton(0),
+    _stopButton(0),
     _positionSlider(0),
     _volumeSlider(0),
     _toggleFullscreen(0),
     _toggleSubtitles(0)
 {
     _playButton = new QPushButton(this);
+    _stopButton = new QPushButton(this);
     _positionSlider = new VlcWidgetSeek(this);
     _volumeSlider = new VlcWidgetVolumeSlider(this);
     _toggleSubtitles = new QPushButton(this);
@@ -15,6 +17,7 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
 
     QHBoxLayout *hlayout = new QHBoxLayout(this);
     hlayout->addWidget(_playButton);
+    hlayout->addWidget(_stopButton);
     hlayout->addWidget(_positionSlider);
     hlayout->addWidget(_volumeSlider);
     hlayout->addWidget(_toggleSubtitles);
@@ -22,10 +25,12 @@ ControlPanel::ControlPanel(QWidget *parent) : QWidget(parent),
     this->setLayout(hlayout);
 
     _playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
+    _stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     _toggleSubtitles->setIcon(style()->standardIcon(QStyle::SP_TitleBarMinButton));
     _toggleFullscreen->setIcon(style()->standardIcon(QStyle::SP_TitleBarMaxButton));
 
     connect(_playButton,SIGNAL(clicked(bool)),SLOT(onPlayButtonClicked()));
+    connect(_stopButton,SIGNAL(clicked(bool)),SLOT(onStopButtonClicked()));
     connect(_toggleSubtitles,SIGNAL(clicked(bool)),SLOT(onToggleSubtitlesBtnClicked()));
     connect(_toggleFullscreen,SIGNAL(clicked(bool)),SLOT(onToggleFullScreenBtnClicked()));
     this->_volumeSlider->setVolume(0);//off volume
@@ -87,5 +92,11 @@ void ControlPanel::onPlayButtonClicked()
 void ControlPanel::onToggleFullScreenBtnClicked()
 {
     emit toggleFullScreen();
+}
+
+void ControlPanel::onStopButtonClicked()
+{
+    emit stopButtonClicked();
+    qDebug()<<"Stop button clicked";
 }
 
