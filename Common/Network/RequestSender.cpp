@@ -21,22 +21,22 @@ namespace Network
         _proxy = proxy;
     }
 
-    QByteArray RequestSender::get(Request& request)
+    QByteArray RequestSender::get(const Request& request)
     {
         return sendRequest(request, true);
     }
 
-    QByteArray RequestSender::post(Request& request)
+    QByteArray RequestSender::post(const Request& request)
     {
         return sendRequest(request, false);
     }
 
-    QByteArray RequestSender::getWhileSuccess(Request& request, int maxCount /*= 2*/)
+    QByteArray RequestSender::getWhileSuccess(const Request& request, int maxCount /*= 2*/)
     {
         return sendWhileSuccess(request, maxCount, true);
     }
 
-    QByteArray RequestSender::postWhileSuccess(Request& request, int maxCount /*= 2*/)
+    QByteArray RequestSender::postWhileSuccess(const Request& request, int maxCount /*= 2*/)
     {
         return sendWhileSuccess(request, maxCount, false);
     }
@@ -56,7 +56,7 @@ namespace Network
         return _error;
     }
 
-    QByteArray RequestSender::sendRequest(Request& request, bool getRequest /*= true*/)
+    QByteArray RequestSender::sendRequest(const Request& request, bool getRequest /*= true*/)
     {
         QTimer timer;
         timer.setInterval(_maxWaitTime);
@@ -69,10 +69,10 @@ namespace Network
         QNetworkReply* reply = getRequest ? manager->get(request.request()) :
                                             manager->post(request.request(false), request.data());
 
-        if (getRequest)
+        /*if (getRequest)
             qDebug() << "[GET] " <<  request.request().url().toString();
         else
-            qDebug() << "[POST]" << request.request(false).url().toString() << request.data();
+            qDebug() << "[POST]" << request.request(false).url().toString() << request.data();*/
 
         QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         QObject::connect(&timer, &QTimer::timeout, reply, &QNetworkReply::abort);
@@ -110,7 +110,7 @@ namespace Network
         return data;
     }
 
-    QByteArray RequestSender::sendWhileSuccess(Request& request, int maxCount /*= 2*/, bool getRequest /*= true*/)
+    QByteArray RequestSender::sendWhileSuccess(const Request& request, int maxCount /*= 2*/, bool getRequest /*= true*/)
     {
         if (maxCount < 0)
             throw QString(__LINE__ + " " __FILE__);

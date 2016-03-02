@@ -2,6 +2,7 @@
 #define NULLPOINTEREXCEPTION_H
 #include "qtexception.h"
 #include "qobject.h"
+#include <typeinfo>
 
 #define REGISTER_PARSE_TYPE(X) template <> struct TypeParseTraits<X> \
     { static const char* name; } ; const char* TypeParseTraits<X>::name = #X
