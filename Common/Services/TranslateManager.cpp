@@ -52,7 +52,7 @@ bool TranslateManager::Translate(QString text, QString &result)
     result = "Error.Check your internet conection.";
     if(!defaultTranslateService()->isAvailible())
     {
-        qDebug("%s",defaultTranslateService()->name().append(" translate service is not availiable."));
+        //qDebug("%s",defaultTranslateService()->name().append(" translate service is not availiable."));
         return AltTranslate(text,result);
     }
     else

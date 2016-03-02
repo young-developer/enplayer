@@ -26,13 +26,16 @@ signals:
     void toggleFullScreen();
     void toggleSubtitlePanel();
     void playButtonClicked();
+    void stopButtonClicked();
 public slots:
     void onStateChanged(Vlc::State state);
     void onToggleSubtitlesBtnClicked();
     void onPlayButtonClicked();
     void onToggleFullScreenBtnClicked();
+    void onStopButtonClicked();
 private:
     QPushButton *_playButton; //play/pause button
+    QPushButton *_stopButton;
     QPushButton *_toggleFullscreen;
     QPushButton *_toggleSubtitles;
     VlcWidgetSeek *_positionSlider;

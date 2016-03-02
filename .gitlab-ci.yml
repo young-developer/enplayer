@@ -1,7 +1,19 @@
 stages:
-  - build
+  - common_build
+  - core_build
+  - player_build
 build_job:
-  stage: build
+  stage: common_build
+  script:
+  - cd Common
+  - qmake Common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - make
+  stage: core_build
+  script:
+  - cd Core
+  - qmake Core.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
+  - make
+  stage: player_build
   script:
   - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11"
   - make

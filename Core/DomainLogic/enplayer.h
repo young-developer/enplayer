@@ -34,6 +34,8 @@ signals:
     void stateChanged(Vlc::State);
 public slots:
     void onStateChanged();
+    void tooglePlayPause();
+    void stop();
 private:
     QStringList args();
     void Init(VlcWidgetVideo *videoWidget);
@@ -46,7 +48,6 @@ public:
     void clearSubtitles();
     void play();
     void pause();
-    void stop();
 
     VlcMediaPlayer *vlcPlayer() const;
 };

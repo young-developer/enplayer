@@ -64,7 +64,8 @@ void ENPlayer::setControlPanel(ControlPanel *ctrlPanel)
 {
     _ctrlPanel = ctrlPanel;
     _ctrlPanel->setMediaPlayer(vlcPlayer());
-    connect(_ctrlPanel,SIGNAL(playButtonClicked()),vlcPlayer(),SLOT(togglePause()));
+    connect(_ctrlPanel,SIGNAL(playButtonClicked()),this,SLOT(tooglePlayPause()));
+    connect(_ctrlPanel,SIGNAL(stopButtonClicked()),this,SLOT(stop()));
     connect(this,SIGNAL(stateChanged(Vlc::State)),_ctrlPanel,SLOT(onStateChanged(Vlc::State)));
 }
 
@@ -100,17 +101,26 @@ void ENPlayer::clearSubtitles()
 
 void ENPlayer::play()
 {
-    vlcPlayer()->play();
+    if(vlcPlayer()->state()== Vlc::State::Paused)
+        vlcPlayer()->play();
 }
 
 void ENPlayer::pause()
 {
+    if(vlcPlayer()->state()== Vlc::State::Playing)
      vlcPlayer()->pause();
+}
+
+void ENPlayer::tooglePlayPause()
+{
+    (vlcPlayer()->state()== Vlc::State::Playing)?pause():play();
 }
 
 void ENPlayer::stop()
 {
-    vlcPlayer()->stop();
+    if(vlcPlayer()->state()!= Vlc::State::Stopped)
+         vlcPlayer()->stop();
+    clearSubtitles();
 }
 
 VlcMediaPlayer *ENPlayer::vlcPlayer() const

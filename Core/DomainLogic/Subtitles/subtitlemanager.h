@@ -8,6 +8,7 @@
 #include <SubtitleParserFactory.h>
 #include "customtooltip.h"
 #include <QHash>
+#include <QPointer>
 
 class SubtitleParser;
 class SubtitlePanel;

@@ -50,7 +50,7 @@ bool SubtitlePanel::isFixed()
 
 void SubtitlePanel::togglePanel()
 {
-    isHidden()?show():hide();
+    (isHidden() && getSubtitles().size()>0)?show():hide(); //if is hidden and has subtitles then show
 }
 
 unsigned short SubtitlePanel::getOpacity() const
