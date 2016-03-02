@@ -22,7 +22,7 @@ void SubtitleManager::Translate()
 {
     if(sender()!=nullptr)
     {
-        SubtitleLabel* label = static_cast<SubtitleLabel*>(sender());
+        QPointer<SubtitleLabel> label = static_cast<SubtitleLabel*>(sender());
         QString result = "Error.Try again later.";
         bool isTranslated = false;
         if(_translateMgr)
@@ -30,9 +30,13 @@ void SubtitleManager::Translate()
 
         if(isTranslated)
         {
-            if(label!=nullptr)
+            if(label)
             {
-                //CustomTooltip *toolTip = new CustomTooltip(label);
+                label->setToolTip(result);
+                /*CustomTooltip *toolTip = new CustomTooltip();
+                toolTip->attachTo(label);
+                toolTip->setText(result);
+                toolTip->show();*/
             }
         }
     }
@@ -60,7 +64,7 @@ QList<SubtitleLabel*> SubtitleManager::splitSubtitleToWords(SubtitleItem *sub)
     //connect TranslateManager
     foreach(SubtitleLabel *subLabel,subWordList)
     {
-        connect(subLabel,SIGNAL(doubleClicked()),SLOT(Translate()));
+        connect(subLabel,SIGNAL(clicked()),SLOT(Translate()));
     }
 
     return subWordList;
@@ -89,8 +93,8 @@ void SubtitleManager::setSubPanel(SubtitlePanel *panel)
 QList<SubtitleItem*> SubtitleManager::convertToQList(std::vector<SubtitleItem*> vector)
 {
     QList<SubtitleItem *> _QList;
-    foreach (SubtitleItem* Item, vector) {
-        _QList.push_back(Item);
+    foreach (SubtitleItem* item, vector) {
+        _QList.push_back(item);
     }
     return _QList;
 }
