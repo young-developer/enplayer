@@ -1,4 +1,4 @@
-#include "commonexception.h"
+#include "CommonException.h"
 #include "domainlogic.h"
 
 #include "ui_aboutdialog.h"

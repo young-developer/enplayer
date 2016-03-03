@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "exapp.h"
-#include "commonexception.h"
+#include "ExApp.h"
+#include "CommonException.h"
 
 inline QTextStream& qStdout()
 {
