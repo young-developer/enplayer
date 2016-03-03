@@ -11,17 +11,17 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += \
-    exapp.cpp \
-    exmessagebox.cpp \
-    qtexception.cpp \
-    nullpointerexception.cpp
+    ExApp.cpp \
+    ExMessagebox.cpp \
+    QtException.cpp \
+    NullPointerException.cpp
 
 HEADERS += \
-    exapp.h \
-    exmessagebox.h \
-    qtexception.h \
-    nullpointerexception.h \
-    commonexception.h
+    ExApp.h \
+    ExMessagebox.h \
+    QtException.h \
+    NullPointerException.h \
+    CommonException.h
 unix {
     target.path = /usr/lib
     INSTALLS += target

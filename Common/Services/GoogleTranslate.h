@@ -4,7 +4,7 @@
 #include <QObject>
 #include "ITranslateService.h"
 #include "NetworkManager.h"
-#include "request.h"
+#include "Request.h"
 #include <QUrl>
 #include <QDebug>
 #include <QJsonDocument>

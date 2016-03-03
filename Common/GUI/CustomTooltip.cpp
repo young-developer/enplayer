@@ -2,7 +2,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QPainter>
-#include "customtooltip.h"
+#include "CustomTooltip.h"
 
 CustomTooltip::~CustomTooltip()
 {

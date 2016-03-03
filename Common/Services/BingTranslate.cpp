@@ -3,7 +3,7 @@
 #include "ITranslateService.h"
 #include "NetworkManager.h"
 #include "BingTranslate.h"
-#include "request.h"
+#include "Request.h"
 #include <QUrl>
 #include <QDebug>
 #include <QUrl>
