@@ -1,5 +1,5 @@
-#include "enplayer.h"
-#include "commonexception.h"
+#include "EnPlayer.h"
+#include "CommonException.h"
 
 ENPlayer::ENPlayer(VlcWidgetVideo *videoWidget ,QObject *parent): QObject(parent),
     _media(0)

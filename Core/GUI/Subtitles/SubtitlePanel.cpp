@@ -1,4 +1,4 @@
-#include "subtitlepanel.h"
+#include "SubtitlePanel.h"
 
 SubtitlePanel::SubtitlePanel(QWidget *parent,bool isFixed) : QWidget(parent),_fixed(isFixed)
 {

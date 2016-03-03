@@ -1,5 +1,5 @@
-#include "subtitlemanager.h"
-#include "commonexception.h"
+#include "SubtitleManager.h"
+#include "CommonException.h"
 
 void SubtitleManager::updateSubtitles(int position)
 {

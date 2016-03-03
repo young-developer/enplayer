@@ -11,15 +11,15 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += \
-    controlpanel.cpp \
-    Subtitles/subtitlepanel.cpp \
-    Subtitles/subtitlelabel.cpp \
+    ControlPanel.cpp \
+    Subtitles/SubtitlePanel.cpp \
+    Subtitles/SubtitleLabel.cpp \
     gui-core.cpp
 
 HEADERS += \
-    controlpanel.h \
-    Subtitles/subtitlepanel.h \
-    Subtitles/subtitlelabel.h \
+    ControlPanel.h \
+    Subtitles/SubtitlePanel.h \
+    Subtitles/SubtitleLabel.h \
     gui-core.h
 unix {
     target.path = /usr/lib
