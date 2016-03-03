@@ -6,19 +6,6 @@ stages:
 common_build_job:
   stage: common_build
   script:
-  - cd Common
-  - cd Exceptions
-  - rename 'y/A-Z/a-z/' *.h
-  - rename 'y/A-Z/a-z/' *.cpp
-  - cd ..
-  - cd Network
-  - rename 'y/A-Z/a-z/' *.h
-  - rename 'y/A-Z/a-z/' *.cpp
-  - cd ..
-  - cd Services
-  - rename 'y/A-Z/a-z/' *.h
-  - rename 'y/A-Z/a-z/' *.cpp
-  - cd ..
   - qmake Common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
