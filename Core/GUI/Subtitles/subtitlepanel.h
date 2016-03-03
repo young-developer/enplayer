@@ -12,7 +12,7 @@
 #include <QDragEnterEvent>
 #include <QStringBuilder>
 #include "subtitlelabel.h"
-#include "Layout/flowlayout.h"
+#include "Layout/FlowLayout.h"
 
 class MainWindow;
 class SubtitleLabel;

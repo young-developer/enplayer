@@ -6,7 +6,7 @@
 #include "Subtitles/subtitlelabel.h"
 #include <SubtitleParser.h>
 #include <SubtitleParserFactory.h>
-#include "customtooltip.h"
+#include "CustomTooltip.h"
 #include <QHash>
 #include <QPointer>
 

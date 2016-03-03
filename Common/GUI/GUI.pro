@@ -10,14 +10,14 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += \
-    Layout/flowlayout.cpp \
+    Layout/FlowLayout.cpp \
     gui-cmn.cpp \
-    customtooltip.cpp
+    CustomTooltip.cpp
 
 HEADERS += \
-    Layout/flowlayout.h \
+    Layout/FlowLayout.h \
     gui-cmn.h \
-    customtooltip.h
+    CustomTooltip.h
 
 unix {
     target.path = /usr/lib

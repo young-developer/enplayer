@@ -1,9 +1,8 @@
-#include "qtexception.h"
-#include "exmessagebox.h"
+#include "CommonException.h"
 #include "ITranslateService.h"
 #include "NetworkManager.h"
 #include "YandexTranslate.h"
-#include "request.h"
+#include "Request.h"
 #include <QUrl>
 #include <QDebug>
 #include <QUrl>
