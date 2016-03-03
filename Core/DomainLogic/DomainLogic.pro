@@ -11,12 +11,12 @@ TEMPLATE = lib
 CONFIG += staticlib
 
 SOURCES += domainlogic.cpp \
-    enplayer.cpp \
-    Subtitles/subtitlemanager.cpp
+    EnPlayer.cpp \
+    Subtitles/SubtitleManager.cpp
 
 HEADERS += domainlogic.h \
-    enplayer.h \
-    Subtitles/subtitlemanager.h
+    EnPlayer.h \
+    Subtitles/SubtitleManager.h
 unix {
     target.path = /usr/lib
     INSTALLS += target
