@@ -1,6 +1,6 @@
 #ifndef NULLPOINTEREXCEPTION_H
 #define NULLPOINTEREXCEPTION_H
-#include "qtexception.h"
+#include "QtException.h"
 #include "qobject.h"
 #include <typeinfo>
 

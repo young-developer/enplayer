@@ -1,8 +1,8 @@
 #include <QString>
 #include <QDebug>
 #include <QtWidgets/QMessageBox>
-#include "qtexception.h"
-#include "nullpointerexception.h"
+#include "QtException.h"
+#include "NullPointerException.h"
 
 
 ExceptionType QtException::Type() const

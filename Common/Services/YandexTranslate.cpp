@@ -1,5 +1,4 @@
-#include "qtexception.h"
-#include "exmessagebox.h"
+#include "CommonException.h"
 #include "ITranslateService.h"
 #include "NetworkManager.h"
 #include "YandexTranslate.h"

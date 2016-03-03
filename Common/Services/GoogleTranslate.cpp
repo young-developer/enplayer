@@ -1,5 +1,5 @@
 #include "GoogleTranslate.h"
-#include "commonexception.h"
+#include "CommonException.h"
 
 bool GoogleTranslate::isLocked() const
 {

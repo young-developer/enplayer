@@ -1,7 +1,7 @@
 #include <QtNetwork>
 #include "Request.h"
 #include "RequestSender.h"
-#include "qtexception.h"
+#include "QtException.h"
 
 namespace Network
 {

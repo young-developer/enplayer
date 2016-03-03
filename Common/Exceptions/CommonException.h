@@ -5,9 +5,9 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDateTime>
-#include "exmessagebox.h"
-#include "qtexception.h"
-#include "nullpointerexception.h"
+#include "ExMessagebox.h"
+#include "QtException.h"
+#include "NullPointerException.h"
 
 #endif // COMMONEXCEPTION
 
