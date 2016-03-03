@@ -7,11 +7,7 @@ common_build_job:
   stage: common_build
   script:
   - cd Common
-  - cd Exceptions
-  - for a_file in *.cpp;do mv $a_file `echo $a_file | tr [:upper:] [:lower:]`  2>/dev/null;done;
-  - for a_file in *.h;do mv $a_file `echo $a_file | tr [:upper:] [:lower:]`  2>/dev/null;done;
-  - cd ..
-  - qmake common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
+  - qmake Common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
     - master
