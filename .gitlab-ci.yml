@@ -17,6 +17,7 @@ common_core_build_job:
 player_build_job:
   stage: player_build
   script:
+  - cp /home/gitlab-runner/builds/56caa0c3/0/young_developer/subparser/libSubParser.a /Core/3dparty/sub-parser/lib/
   - qmake ENPlayer.pro -r "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
