@@ -58,20 +58,20 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
 
-#Qt Network wrapper
+#DOMAIN LOGIC
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/Network/release/ -lNetwork
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/Network/debug/ -lNetwork
-else:unix: LIBS += -L$$OUT_PWD/../Common/Network/ -lNetwork
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/release/ -lDomainLogic
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/debug/ -lDomainLogic
+else:unix: LIBS += -L$$OUT_PWD/../Core/DomainLogic/ -lDomainLogic
 
-INCLUDEPATH += $$PWD/../Common/Network
-DEPENDPATH += $$PWD/../Common/Network
+INCLUDEPATH += $$PWD/../Core/DomainLogic
+DEPENDPATH += $$PWD/../Core/DomainLogic
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/release/libNetwork.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/debug/libNetwork.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/release/Network.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/debug/Network.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/libNetwork.a
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/libDomainLogic.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/libDomainLogic.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/DomainLogic.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/DomainLogic.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/libDomainLogic.a
 
 # Common Translate Services
 
@@ -88,16 +88,13 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/debug/Services.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/libServices.a
 
-# LibVLC
-unix|win32: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt
+#Subtitle Parser library
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
+else:unix: LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
 
-INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
-DEPENDPATH += $$PWD/../Core/3dparty/libvlc-qt/include
-
-unix|win32: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt-widgets
-
-INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
-DEPENDPATH += $$PWD/../Core/3dparty/libvlc-qt/include
+INCLUDEPATH += $$PWD/../Core/3dparty/sub-parser/include
+DEPENDPATH += $$PWD/../Core/3dparty/sub-parser/include
 
 # CORE APPLICATION GUI
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/GUI/release/ -lGUI-core
@@ -113,25 +110,33 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/debug/GUI-core.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/GUI/libGUI-core.a
 
-#DOMAIN LOGIC
+# LibVLC
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/release/ -lDomainLogic
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/debug/ -lDomainLogic
-else:unix: LIBS += -L$$OUT_PWD/../Core/DomainLogic/ -lDomainLogic
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt
+else:unix: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -llibvlc-qt.dll
 
-INCLUDEPATH += $$PWD/../Core/DomainLogic
-DEPENDPATH += $$PWD/../Core/DomainLogic
+INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
+DEPENDPATH += $$PWD/../Core/3dparty/libvlc-qt/include
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/libDomainLogic.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/libDomainLogic.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/release/DomainLogic.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/debug/DomainLogic.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/DomainLogic/libDomainLogic.a
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt-widgets
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -lvlc-qt-widgets
+else:unix: LIBS += -L$$PWD/../Core/3dparty/libvlc-qt/lib/ -llibvlc-qt-widgets.dll
 
-#Subtitle Parser library
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
-else:unix: LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
+INCLUDEPATH += $$PWD/../Core/3dparty/libvlc-qt/include
+DEPENDPATH += $$PWD/../Core/3dparty/libvlc-qt/include
 
-INCLUDEPATH += $$PWD/../Core/3dparty/sub-parser/include
-DEPENDPATH += $$PWD/../Core/3dparty/sub-parser/include
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/Network/release/ -lNetwork
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/Network/debug/ -lNetwork
+else:unix: LIBS += -L$$OUT_PWD/../Common/Network/ -lNetwork
+
+INCLUDEPATH += $$PWD/../Common/Network
+DEPENDPATH += $$PWD/../Common/Network
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/release/libNetwork.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/debug/libNetwork.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/release/Network.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/debug/Network.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/libNetwork.a
+
+
