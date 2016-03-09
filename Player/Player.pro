@@ -92,7 +92,7 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/libServices.a
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
 else:unix: LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
-unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/libSubParser.a
+unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/3dparty/sub-parser/lib/libSubParser.a
 
 INCLUDEPATH += $$PWD/../Core/3dparty/sub-parser/include
 DEPENDPATH += $$PWD/../Core/3dparty/sub-parser/include
