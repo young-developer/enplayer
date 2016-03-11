@@ -9,7 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _enPlayer(nullptr)
+
 {
+
     ui->setupUi(this);
     aboutDialog = nullptr;
     aboutDialogUI = nullptr;
@@ -37,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     Player()->play();
 #endif*/
     connect(ui->controlPanel,SIGNAL(toggleFullScreen()),SLOT(toggleFullScreen()));
+
+
 }
 
 ENPlayer *MainWindow::Player() const
@@ -180,14 +184,17 @@ void MainWindow::on_actionShow_log_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
+
+
     if(aboutDialog == nullptr)
     {
-       aboutDialog = new QDialog(this);
-       aboutDialogUI = new Ui::AboutDialog;
-       aboutDialogUI->AppName->setText(APP_NAME);
-       aboutDialogUI->Version->setText(APP_VERSION_NUMBER);
-       aboutDialogUI->DescText->setText("EN Player - simple video player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence.");
-       aboutDialogUI->setupUi(aboutDialog);
+        aboutDialog= new QDialog(this);
+        aboutDialogUI = new Ui::AboutDialog;
+        aboutDialogUI->setupUi(aboutDialog);
+        aboutDialogUI->AppName->setText(APP_NAME);
+        aboutDialogUI->Version->setText(APP_VERSION_NUMBER);
+        aboutDialogUI->DescText->setText("EN Player - simple video player which plays all formats video (based on VLC player) and helps user to watch videos in english with subtitles and understand each word and sentence.");
     }
-    aboutDialog->exec();
+        aboutDialog->show();
+
 }
