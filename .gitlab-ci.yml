@@ -6,11 +6,11 @@ common_core_build_job:
   stage: common_core_build
   script:
   - cd Common
-  - qmake Common.pro -r -spec linux-g++-32 -platform linux-g++-32 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
+  - qmake Common.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   - cd ..
   - cd Core
-  - qmake Core.pro -r -spec linux-g++-32 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
+  - qmake Core.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
     - develop
@@ -18,7 +18,7 @@ player_build_job:
   stage: player_build
   script:
   - cp /home/gitlab-runner/builds/56caa0c3/0/young_developer/subparser/libSubParser.a Core/3dparty/sub-parser/lib/
-  - qmake ENPlayer.pro -r -spec linux-g++-32 -platform linux-g++-32 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
     - master
@@ -26,7 +26,7 @@ player_build_job:
 cleanup_build_job:
   stage: cleanup_build
   script:
-  - qmake ENPlayer.pro -r -spec linux-g++-32 -platform linux-g++-32 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
+  - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make clean
   when: on_failure
   only:
