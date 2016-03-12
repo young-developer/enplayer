@@ -18,9 +18,9 @@ player_build_job:
   stage: player_build
   script:
   - cp /home/gitlab-runner/builds/56caa0c3/0/young_developer/subparser/libSubParser.a Core/3dparty/sub-parser/lib/
-  - cp /root/vlc-qt-0.10.0/build/src/core/libvlc-qt.a Core/3dparty/libvlc-qt/lib/libvlc-qt.dll.a
-  - cp /root/vlc-qt-0.10.0/build/src/widgets/libvlc-qt-widgets.a Core/3dparty/libvlc-qt/lib/libvlc-qt-widgets.dll.a
-  - cp /root/vlc-qt-0.10.0/build/src/qml/libvlc-qt-qml.a Core/3dparty/libvlc-qt/lib/libvlc-qt-widgets.dll.a
+  - cp /home/vlc-qt-0.10.0/build/src/core/libvlc-qt.a Core/3dparty/libvlc-qt/lib/libvlc-qt.dll.a
+  - cp /home/vlc-qt-0.10.0/build/src/widgets/libvlc-qt-widgets.a Core/3dparty/libvlc-qt/lib/libvlc-qt-widgets.dll.a
+  - cp /home/vlc-qt-0.10.0/build/src/qml/libvlc-qt-qml.a Core/3dparty/libvlc-qt/lib/libvlc-qt-widgets.dll.a
   - qmake ENPlayer.pro -r -spec linux-g++-64 "CONFIG+=debug" "CONFIG+=qml_debug" "CONFIG+=c++11" "CONFIG += warn_off"
   - make
   only:
