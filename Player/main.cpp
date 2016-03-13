@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "ExApp.h"
 #include "CommonException.h"
+#include <QTextCodec>
 
 inline QTextStream& qStdout()
 {
@@ -47,6 +48,7 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
 
 int main(int argc, char *argv[])
 {
+    //debug info to file
     #ifdef QT_DEBUG
     qInstallMessageHandler(fileMessageHandler);
     #endif

@@ -31,16 +31,16 @@ bool YandexTranslate::Translate(QString text, QString &result)
         result="";
         QByteArray resData;
 
-        resData = Network::NetworkManager().GET(reqUrl);
+        resData = Network::NetworkManager().POST(reqUrl);
         if(resData.size())
         {
             qDebug()<<reqUrl.url();
             QDomDocument doc;
 
-            QString data = QByteArray::fromHex(resData);
+            QString data = QString::fromUtf8(resData);
             doc.setContent(data);
             QDomNodeList list=doc.elementsByTagName("text");
-            qDebug()<<"Word: "<<text<<" - перевод: "<<list.at(0).toElement().text();
+            qDebug()<<"Word: "<<text<<" - translate: "<<list.at(0).toElement().text();
             result = list.at(0).toElement().text();
         }
     }
