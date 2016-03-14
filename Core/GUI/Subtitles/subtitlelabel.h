@@ -3,9 +3,10 @@
 
 #include <QLabel>
 #include <QDebug>
-#include <CustomTooltip.h>
-class SubtitleItem;
+#include "CustomTooltip.h"
 
+class SubtitleItem;
+class CustomTooltip;
 class SubtitleLabel : public QLabel
 {
     Q_OBJECT

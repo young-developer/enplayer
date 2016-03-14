@@ -10,7 +10,7 @@ class CustomTooltip : public QLabel
     Q_OBJECT
 public:
     ~CustomTooltip();
-    CustomTooltip(QWidget *parent = 0);
+    explicit CustomTooltip(QWidget *parent = 0);
     void attachTo(QWidget *parent);
     void mouseMoveEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
