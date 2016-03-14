@@ -10,8 +10,7 @@ CustomTooltip::~CustomTooltip()
     setMouseTracking(true);
     QFont serifFont("Arial", 14, QFont::Normal);
     setFont(serifFont);
-    setStyleSheet("color:red;");
-
+    setStyleSheet("color:blue;");
 }
 
 CustomTooltip::CustomTooltip(QWidget *parent) : QLabel(parent)
@@ -40,9 +39,14 @@ void CustomTooltip::mouseMoveEvent(QMouseEvent *event)
 void CustomTooltip::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
-    /*QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
+    QPainter painter(this);
+   /* painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255,255,255, 140));
     painter.drawRect(event->rect());*/
+    QFont font=painter.font() ;
+     font.setPointSize ( 14 );
+     //font.setWeight(QFont::DemiBold);
+     painter.setFont(font);
+     painter.drawText(event->rect(),text());
 }
