@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
     ExApplication a(argc, argv);
     a.setApplicationName(APP_NAME);
     a.setApplicationVersion(APP_VERSION_NUMBER);
+    //a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");//subtitle tooltip styles
     MainWindow w;
     w.show();
 

@@ -27,6 +27,11 @@ void SubtitleManager::Translate()
         bool isTranslated = false;
         if(_translateMgr && !label->isTranslated())
             isTranslated = _translateMgr->Translate(label->text(),result/*out*/);
+        else
+        {
+            if(label)
+                label->showCustomTooltip();
+        }
 
         if(isTranslated)
         {

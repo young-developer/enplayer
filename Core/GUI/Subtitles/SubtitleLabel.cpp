@@ -23,16 +23,9 @@ void SubtitleLabel::setToolTip(const QString &text)
     {
         trText = translatedText = text;
     }
-    toolTip->setText(trText);
-    toolTip->show();
-    if(!toolTip->isVisible())
-    {
-        qWarning()<<"Warning: Show default tooltip!";
-        QLabel::setToolTip(trText);
-    }
+
+    QToolTip::showText(QWidget::mapToGlobal(this->rect().topRight()),trText,this,this->rect(),100000);
 }
-
-
 
 void SubtitleLabel::Init()
 {
@@ -84,14 +77,14 @@ bool SubtitleLabel::isTranslated()
     return !getTranslatedText().isEmpty();
 }
 
-void SubtitleLabel::showTooltip()
+void SubtitleLabel::showCustomTooltip()
 {
-    toolTip->show();
+    QToolTip::showText(QWidget::mapToGlobal(this->rect().topRight()),getTranslatedText(),this,this->rect(),100000);
 }
 
 void SubtitleLabel::hideTooltip()
 {
-    toolTip->hide();
+    QToolTip::hideText();
     qDebug()<<"tooltip text ="<<toolTip->text();
 }
 
