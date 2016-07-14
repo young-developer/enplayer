@@ -4,10 +4,10 @@
 # Project Semantic Versioning http://semver.org/
 #-------------------------------------------------
 
-win32:VERSION = 0.6.8.1 # major.minor.patch.build
-else:VERSION = 0.6.8    # major.minor.patch
+win32:VERSION = 0.6.9.0 # major.minor.patch.build
+else:VERSION = 0.6.9    # major.minor.patch
 
-DEFINES += APP_VERSION_NUMBER=\\\"0.6.8\\\"
+DEFINES += APP_VERSION_NUMBER=\\\"0.6.9\\\"
 DEFINES += APP_NAME=\\\"EnPlayer\\\"
 DEFINES += APP_LOG_FILENAME=\\\"log.txt\\\"
 
