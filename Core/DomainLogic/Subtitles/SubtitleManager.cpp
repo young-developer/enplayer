@@ -25,18 +25,19 @@ void SubtitleManager::Translate()
         QPointer<SubtitleLabel> label = static_cast<SubtitleLabel*>(sender());
         QString result = "Error.Try again later.";
         bool isTranslated = false;
-        if(_translateMgr)
+        if(_translateMgr && !label->isTranslated())
             isTranslated = _translateMgr->Translate(label->text(),result/*out*/);
+        else
+        {
+            if(label)
+                label->showCustomTooltip();
+        }
 
         if(isTranslated)
         {
             if(label)
             {
                 label->setToolTip(result);
-                /*CustomTooltip *toolTip = new CustomTooltip();
-                toolTip->attachTo(label);
-                toolTip->setText(result);
-                toolTip->show();*/
             }
         }
     }
@@ -44,9 +45,6 @@ void SubtitleManager::Translate()
 
 void SubtitleManager::clearSubtitles()
 {
-    if(_subParser)
-        delete _subParser;
-
     foreach (SubtitleItem* item, _subtitles) {
         if(item)
             delete item;

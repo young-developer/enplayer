@@ -43,21 +43,6 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Exceptions/debug/Exceptions.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Exceptions/libExceptions.a
 
-#Common application GUI
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
-else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
-
-INCLUDEPATH += $$PWD/../Common/GUI
-DEPENDPATH += $$PWD/../Common/GUI
-
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a
-
 #DOMAIN LOGIC
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Core/DomainLogic/release/ -lDomainLogic
@@ -90,7 +75,7 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Services/libServices.a
 
 #Subtitle Parser library
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser_d
 else:unix: LIBS += -L$$PWD/../Core/3dparty/sub-parser/lib/ -lSubParser
 unix: PRE_TARGETDEPS += $$OUT_PWD/../Core/3dparty/sub-parser/lib/libSubParser.a
 
@@ -142,5 +127,19 @@ else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PW
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/debug/Network.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/Network/libNetwork.a
 
-
 unix: LIBS += -lvlc -lvlccore
+
+#Common application GUI
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/release/ -lGUI-cmn
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Common/GUI/debug/ -lGUI-cmn
+else:unix: LIBS += -L$$OUT_PWD/../Common/GUI/ -lGUI-cmn
+
+INCLUDEPATH += $$PWD/../Common/GUI
+DEPENDPATH += $$PWD/../Common/GUI
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/libGUI-cmn.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/libGUI-cmn.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/release/GUI-cmn.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/debug/GUI-cmn.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Common/GUI/libGUI-cmn.a

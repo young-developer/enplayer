@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "ExApp.h"
 #include "CommonException.h"
+#include <QTextCodec>
 
 inline QTextStream& qStdout()
 {
@@ -47,12 +48,19 @@ void fileMessageHandler(QtMsgType type,  const QMessageLogContext &context, cons
 
 int main(int argc, char *argv[])
 {
+    //debug info to file
     #ifdef QT_DEBUG
     qInstallMessageHandler(fileMessageHandler);
     #endif
+    QStringList paths = QCoreApplication::libraryPaths();
+    paths.append(".");
+    paths.append("platforms");
+    QCoreApplication::setLibraryPaths(paths);
+
     ExApplication a(argc, argv);
     a.setApplicationName(APP_NAME);
     a.setApplicationVersion(APP_VERSION_NUMBER);
+    //a.setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");//subtitle tooltip styles
     MainWindow w;
     w.show();
 

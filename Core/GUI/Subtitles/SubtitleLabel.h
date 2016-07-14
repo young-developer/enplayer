@@ -3,8 +3,11 @@
 
 #include <QLabel>
 #include <QDebug>
-class SubtitleItem;
+#include <QToolTip>
+#include "CustomTooltip.h"
 
+class SubtitleItem;
+class CustomTooltip;
 class SubtitleLabel : public QLabel
 {
     Q_OBJECT
@@ -12,6 +15,9 @@ class SubtitleLabel : public QLabel
 public:
     explicit SubtitleLabel(QWidget *parent = 0);
     explicit SubtitleLabel(QString text, QWidget *parent = 0);
+    void setToolTip(const QString &text);
+    bool isTranslated();
+    void showCustomTooltip();
 signals:
     void clicked();
     void doubleClicked();
@@ -19,13 +25,18 @@ signals:
     void mouseEntered();
     void mouseLeaved();
 public slots:
-
+    void hideTooltip();
 protected:
     void mouseDoubleClickEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void enterEvent(QEvent *event);
     void leaveEvent(QEvent *event);
+private:
+    CustomTooltip *toolTip;
+    QString translatedText;
+    void setTranslatedText(const QString &text);
+    QString getTranslatedText() const;
 };
 
 #endif // SUBTITLELABEL_H

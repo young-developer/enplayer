@@ -14,14 +14,16 @@ SOURCES += \
     YandexTranslate.cpp \
     GoogleTranslate.cpp \
     BingTranslate.cpp \
-    TranslateManager.cpp
+    TranslateManager.cpp \
+    GlosbeTranslate.cpp
 
 HEADERS += \
     ITranslateService.h \
     YandexTranslate.h \
     GoogleTranslate.h \
     BingTranslate.h \
-    TranslateManager.h
+    TranslateManager.h \
+    GlosbeTranslate.h
 
 unix {
     target.path = /usr/lib

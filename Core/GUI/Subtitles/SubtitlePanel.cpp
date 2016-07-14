@@ -20,12 +20,12 @@ void SubtitlePanel::Init()
     setMaximumHeight(80);
     setMaximumWidth(400);
 
-    QFont defaultFont( "Arial", 14, QFont::Normal);//default font Arial,14px,Normal
+    QFont defaultFont( "Arial", 16, QFont::Normal);//default font Arial,14px,Normal
     setFont(defaultFont);
     setOpacity(50);//opacity 50%
 
-    QLayout *flayout = new QHBoxLayout();
-    flayout->setAlignment(flayout,Qt::AlignLeft);
+    QLayout *flayout = new FlowLayout();
+    flayout->setAlignment(flayout,Qt::AlignHCenter | Qt::AlignVCenter);
     setLayout(flayout);
 }
 
