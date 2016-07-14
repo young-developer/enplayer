@@ -49,7 +49,7 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../GUI/libGUI-core.a
 
 win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../3dparty/sub-parser/lib/ -lSubParser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../3dparty/sub-parser/lib/ -lSubParser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../3dparty/sub-parser/lib/ -lSubParser_d
 else:unix: LIBS += -L$$PWD/../3dparty/sub-parser/lib/ -lSubParser
 
 INCLUDEPATH += $$PWD/../3dparty/sub-parser/include

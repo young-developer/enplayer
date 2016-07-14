@@ -52,6 +52,11 @@ int main(int argc, char *argv[])
     #ifdef QT_DEBUG
     qInstallMessageHandler(fileMessageHandler);
     #endif
+    QStringList paths = QCoreApplication::libraryPaths();
+    paths.append(".");
+    paths.append("platforms");
+    QCoreApplication::setLibraryPaths(paths);
+
     ExApplication a(argc, argv);
     a.setApplicationName(APP_NAME);
     a.setApplicationVersion(APP_VERSION_NUMBER);
