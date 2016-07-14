@@ -45,9 +45,6 @@ void SubtitleManager::Translate()
 
 void SubtitleManager::clearSubtitles()
 {
-    if(_subParser)
-        delete _subParser;
-
     foreach (SubtitleItem* item, _subtitles) {
         if(item)
             delete item;
