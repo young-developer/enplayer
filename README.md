@@ -7,6 +7,10 @@ ___
 - LibVLC-Qt  https://github.com/vlc-qt/ ( https://vlc-qt.tano.si/ ) v.0.10.0
 - LibSub-Parser https://github.com/young-developer/subtitle-parser
 
+#### Compilers
+- MSVC2013 x64 for Windows  
+- MINGW x64 for Linux/Unix
+
 ___
 ##### General Public License (GNU GPLv3)
 ```
